@@ -1,309 +1,496 @@
-ADETS;Indiv.Customer Account Maint. ;Account Management
-AEVTO;Acg.Event Transaction data (Accounting event real time) ;Account Management
-AHLBO;Det. Acc. Ledger Balance ;Account Management
-AHVBO;Detailed Account Value Balance ;Account Management
-AMVTO;Detail Accounting Movements ;Account Management
-ANTUS;Accounting Nature Code ;Account Management
-ARESS;Indiv. Acc. Results History ;Account Management
-ARETO;Indiv. Account General Param. ;Account Management
-ATAXO;Ind. Acc. Tax Cdt. History ;Account Management
-ATRDO;Acg.Transaction Data ;Account Management
-ATXCO;Tax Condition Maintenance ;Account Management
-IINTO;Interest base rates ;Account Management
-AINTS;Account Interest Cond.Hist. ;Arragement Management
-DCPOO;SLAVE ACCOUNTS (CASH POOLING) ;Cash Management
-DMSTO;MASTER ACCOUNTS (CASH POOLING) ;Cash Management
-DSLVO;SLAVE ACCOUNTS (CASH POOLING) ;Cash Management
-CSCOO;Security Composition ;Collateral Management
-CSECS;Securities Maintenance part 1 ;Collateral Management
+AADVO;Advices ;Customer_Reporting
+AAFRL;Advice Frame Logging;auxiliary
+AAFRL;Advice Frame Logging;auxiliary
+AAFRO;Advice Frame Dictionary ;auxiliary
+AAFRO;Advice Frame Dictionary ;auxiliary
+AAISO;ABKTS Parameters for AIS ;General_Ledger
+AAISO;ABKTS Parameters for AIS ;auxiliary
+AASPL;Logging structure for AASPS ;auxiliary
+AASPL;Logging structure for AASPS ;auxiliary
+AASPS;Accounting System Parameter ;CORE
+AASPS;Accounting System Parameter ;auxiliary
+ABA1L;LOG File for Int. Base Account ;auxiliary
+ABA1L;LOG File for Int. Base Account ;auxiliary
+ABA1S;INTERNAL BASE ACCOUNT ;General_Ledger
+ABASL;Logging ABASS ;auxiliary
+ABASS;Basic Allocation Table ;auxiliary
+ABCLL;Global FX Limits per Ccy - Log ;auxiliary
+ABCLO;Global FX Limits per Currency ;Financial_Markets_Trade_engine
+ABKTL;AUTOMATIC BOOKING TABLE LOG. ;auxiliary
+ABKTS;AUTOMATIC BOOKING TABLE ;General_ledger
+ABUDL;Logging ABUDL ;auxiliary
+ABUDS;Bufget per Ledger Rubric ;General_ledger
+ACLOG;ACCESS LOG FILE ;auxiliary
+ACVRO;Maintain EURO Conversion Rates ;auxiliary
+ADEIO;Indiv.Cust. Account Maint. Int ;Account Management
+ADETL;Logging ADETS ;auxiliary
+ADETS;Indiv.Customer Account Maint. ;Current_Account_Engine
+ADLGL;Logging ADLGS ;auxiliary
+ADLGS;Maint Det.Acc.per Ledger Rubr. ;General_ledger
+ADSNL;Logging ADSNS ;auxiliary
+ADSNS;P/L Distribution Key Dict. ;General_ledger
+AEVTO;Acg.Event Transaction data (Accounting event real time) ;Current_Account_Engine
+AEXRL;Logging AEXRS ;auxiliary
+AEXRS;Acc. Exch. Rates - Occas.Input ;Reference_Data_Manager
+AFOLO;Folders Directory ;General_Ledger
+AGEXL;Logging AGEXS ;auxiliary
+AGEXS;General Expence Rubric Input ;General_ledger
+AHLBO;Det. Acc. Ledger Balance ;Current_Account_Engine
+AHVBO;Detailed Account Value Balance ;Current_Account_Engine
+AIBRL;Logging Interbranch Table ;auxiliary
+AIBRO;INTERBRANCH TABLE ;auxiliary
+AINIO;Account Interest Cond.Interim ;auxiliary
+AINTL;Logging AINTS ;auxiliary
+AINTS;Account Interest Cond.Hist. ;Arrangement_Management
+AISTO;Indiv.Account Interest Statem. ;Customer_Reporting
+AJSTL;Logging AJSTO ;auxiliary
+AJSTO;Justif. Accounts/inventory ;General_Ledger
+ALGRL;Logging ALGRS ;auxiliary
+ALGRS;Ledger Definition ;General_ledger
+AMDCO;Multiple D/C Folders ;General_Ledger
+AMVTO;Detail Accounting Movements ;Current_Account_Engine
+ANEUL;LOGGING ANEUO ;auxiliary
+ANEUO;NEUTRALISED ACCOUNTS ;General_Ledger
+ANTUL;Logging ANTUS ;auxiliary
+ANTUS;Accounting Nature Code ;Current_Account_Engine
+APPNL;Logging APPNO ;auxiliary
+APPNO;Product per Nature Code ;Product_Management
+ARBRL;Logging ARBRO ;auxiliary
+ARBRO;Ledger Rubric Table ;General_Ledger
+ARCDL;Logging ARCDO ;auxiliary
+ARCDO;RCE's per P/L Distrib. Key ;General_Ledger
+AREIO;Acc. Inter. Sett. Maint. Inte. ;auxiliary
+ARESL;Logging File for ARESS ;auxiliary
+ARESS;Indiv. Acc. Results History ;Current_Account_Engine
+ARETL;Logging ARETO ;auxiliary
+ARETO;Indiv. Account General Param. ;Current_Account_Engine
+AROTL;Logging AROTO ;auxiliary
+AROTO; ;General_Ledger
+ARPPO;Cpty Root Number per Product ;auxiliary
+ASELL;Logging File ASELO ;auxiliary
+ASELO; ;auxiliary
+ASPAL;Logging ASPAS ;auxiliary
+ASPAS;Individual Acc.Statem.Param. ;Customer_Reporting
+ASPIO;Indiv. Acc.Statem.Param. Int. ;auxiliary
+ASTDO;Statistic Decission Table ;General_Ledger
+ASTMO;Statement History ;Reference_Data_Manager
+ASTMS;Statement Narrative Input ;auxiliary
+ATADL;Logging File for ATADO ;auxiliary
+ATADO;Standard Tax Cdt. Directory ;auxiliary
+ATAHL;Logging File for ATAHS ;auxiliary
+ATAHS;Standard Tax Conditions ;auxiliary
+ATAXL;Logging File for ATAXO ;auxiliary
+ATAXO;Ind. Acc. Tax Cdt. History ;Current_Account_Engine
+ATDCL;Logging ATDCS ;auxiliary
+ATDCS;Bkg.Entries Free Text Maint. ;Reference_Data_Manager
+ATMPO;Advices Temporary ;Customer_Reporting
+ATRCL;ACC. TRAN. CONTENT LOGGING ;auxiliary
+ATRCS;ACCOUNTING TRANS. CONTENTS ;General_Ledger
+ATRDO;Acg.Transaction Data ;Current_Account_Engine
+ATRTL;ACCOUNT EVENT TYPE LOGGING ;auxiliary
+ATRTS;ACCOUNTING EVENT TYPES FILE ;General_ledger
+ATXCL;Logging ATXCO records ;auxiliary
+ATXCO;Tax Condition Maintenance ;Current_Account_Engine
+BASWO;Bond deal related asset swaps ;Financial_Markets_Trade_engine
+BATCH;Batch file ;auxiliary
+BBOKS;BOND Position Book ;Financial_Markets_Trade_engine
+BDLAO;Bond Accounting Status File ;Financial_Markets_Trade_engine
+BDLGL;MIRROR OF BDLGO ;auxiliary
+BDLGO;Bond Deals Inventory ;Financial Markets
+BDLPO;Payment Status File ;Financial_Markets_Trade_engine
+BDLTO;Trailer Bond Deals ;Financial_Markets_Trade_engine
+BICTO;Bond Coupons ;Financial_Markets_Trade_engine
+BISPO;Bond Market Prices ;Financial_Markets_Trade_engine
+BISSO;Bond Issuances Inventory ;Financial Markets
+BITTO;Bond Trading-deal Trailers ;Financial_Markets_Trade_engine
+BPOTO;Bond Segments per Pos.Book ;Financial_Markets_Trade_engine
+BPRDO;Positions Product Code File ;Financial_Markets_Trade_engine
+BREDO;Redemption Dates & Conditions ;Financial_Markets_Trade_engine
+BREPO;Bond Collateral/Cash-records ;Financial_Markets_Trade_engine
+BRPIO;Interim REPO collateral file ;Financial Markets
+BSPIO;STANDARD PAYMENT INSTR. BONDS ;Financial Markets
+CBFMO;BRUSSEL'S FORTUNE MANAGEMENT ;auxiliary
+CC3PL;Commission 3rd Party ;Financial Markets
+CC3PO;Commission 3RD Parties ;Business_Lending_Engine
+CCBRO;Risk At Close of Business ;Business_Lending_Engine
+CCDIL;Log CCDIS Comm.Dictionary ;auxiliary
+CCDIS;Commission Dictionary Inv. ;auxiliary
+CCFPO;Cash flow position Comm.loans ;Business_Lending_Engine
+CCGRL;COMMISSION GROUP DICTION. LOG. ;auxiliary
+CCGRS;COMMISSION GROUPS DICTIONARY ;Business_Lending_Engine
+CCMHL;Comm.loans Header record Log ;auxiliary
+CCMHO;Commercial loans Header record ;Business_Lending_Engine
+CCOCL;Logging CCOCO Commis.Due Dates ;auxiliary
+CCOCO;Commission Due Dates ;Business_Lending_Engine
+CCOML;Logging CCOMS commissions ;auxiliary
+CCOMS;Commissions non-automated ;Business_Lending_Engine
+CCORL;Log CCORO Comm.Revision Sched. ;auxiliary
+CCORO;Commission Revision Schedule ;Business_Lending_Engine
+CCREO;Commission Results Structure ;Business_Lending_Engine
+CCRXO;RXM CUSTOMER LINK ;Financial Markets
+CCUSO;Share Trading : Custodian Def. ;Financial Markets
+CDFAO;dummy CFACS ;auxiliary
+CDIAL;Diary part of representation ;auxiliary
+CDIAO;Diary part of representation ;auxiliary
+CEXPS;Commercial Explication Invent. ;Lending
+CEXRO;MT EXCHANGE RATE FILE ;Financial_Markets_Trade_engine
+CEXSO;Excess/Out of order ;Business_Lending_Engine
+CFACL;Logging CFACS ;auxiliary
+CFACO;FUS' FACILITIES STRUCTURE ;Business_Lending_Engine
+CFACS;Facilities ;Business_Lending_Engine
+CFAIO;Facility Interim Table ;auxiliary
+CFATO;Facil. booking entries ;Lending
+CFCRO;Facility Comm. Date/Amount ;Lending
+CFDDL;Logging CFDDL ;auxiliary
+CFDDO;Fee Due Dates per Fee Type ;Business_Lending_Engine
+CFFEO;Facility per Comm.Type ;Business_Lending_Engine
+CFRSL;Facility Reduc.Sched. Logging ;auxiliary
+CFRSO;Facility Reduction Schedule ;Business_Lending_Engine
+CFUPO;FUS DEFAULT PARAMETERS ;auxiliary
+CFUSO;FOLLOW UP SYSTEM ;Business_Lending_Engine
+CFXRO;Fac.comm. Multidrawing Ccy ;Business_Lending_Engine
+CGATO;Guarantees Given Booking ;Business_Lending_Engine
+CGUAL;Logging CGUAS ;auxiliary
+CGUAS;GUARANTEES EMITTED ;Business_Lending_Engine
+CGUCL;Guarantee comm. due dates LOG ;auxiliary
+CGUCO;Guarantee commission due dates ;Business_Lending_Engine
+CGURL;Guarantee reduction sched. LOG ;Lending
+CGURO;Guarantee Reduction Schedule ;Business_Lending_Engine
+CHFCO;History of Fee Calcul. Basis ;Lending
+CMHIO;Commercial loan Header Interim ;auxiliary
+CMRGL;Customer Margin LOG ;auxiliary
+CMRGO;Customer Margin ;Business_Lending_Engine
+CMTBL;LOGFILE CMTBO ;auxiliary
+CMTBO;UNDERLYING CONTACTS MT ;Business_Lending_Engine
+CMTCO;Margin Trading deals ;Financial Markets
+CMTCS;MARGIN TRADING CUSTOMER ;Financial Markets
+CMTIO;Trailer commer. loan Interim ;auxiliary
+CMTLL;Comm.loan Trailer record Log ;auxiliary
+CMTLO;Trailer commercial loans ;Business_Lending_Engine
+COMSO;Status file Commercial Loans ;Business_Lending_Engine
+CPBCO;Private Banking Customer Def. ;Financial Markets
+CPBGO;GROUP PB CUSTOMERS ;auxiliary
+CPBPO;Private Banking Portfolio ;Financial Markets
+CPTIL;Comm.loan payment instr. Log ;auxiliary
+CPTIO;Commercial loans paym.instr. ;Business_Lending_Engine
+CREPL;Warranties & Representations ;Lending
+CREPO;Warranties & Representations ;Business_Lending_Engine
+CREXO;RIS Exception Table ;Business_Lending_Engine
+CRISO;Risk View ;Business_Lending_Engine
+CROCL;RAROC INFORMATION ;lending
+CROCO;RAROC INFORMATION ;Business_Lending_Engine
+CRTRO;Real Time Risk Structure ;Business_Lending_Engine
+CRXMO;RXM CONTRACTS ;Financial Markets
+CSCOL;Security Composition Logging ;auxiliary
+CSCOO;Security Composition ;Collateral_Management
+CSECL;Securities Logging ;auxiliary
+CSECS;Securities Maintenance part 1 ;Collateral_Management
+CSEIO;Securities Interim Table ;auxiliary
+CSHAL;Customer Share Inventory Log ;auxiliary
+CSHAO;Customer Share Inventory ;financial markets
+CSHCO;Share Charges Definition ;financial markets
+CSHDS;Share Dealtype Definition ;financial markets
+CSHML;Logging Structure CSHMO ;auxiliary
+CSHMO;Share Deals Matching Structure ;auxiliary
+CSHOO;SHARE TRADIN OPTIONS STRUCTURE ;financial markets
+CSHRO;Replace Share deals ;financial markets
+CSHTL;Share Type Inventory Logging ;auxiliary
+CSHTO;Share Type Inventory ;financial markets
+CSHVO;SHARE TRADING DIVIDENDS ;financial markets
+CSIMS;Simplified inv. Commercial ;Business_Lending_Engine
+CSLFO; ;Business_Lending_Engine
+CSSHL;Security Share Portfolio Log ;auxiliary
+CSSHO;Security Share Portfolio ;financial markets
+DBATO;BATCH PARAMETERS ;Instruction_and_Order_Management
+DBILO;Billing events for SEPA ;Customer_Billing
+DCBDO;Batch information ;Payments_Execution_Engine
+DCBMO;Eurochannel reference table ;Payments_Execution_Engine
+DCBRO;CBD trans reporting for SEPA ;Local_Regulatory_Reporting_Layer
+DCLHO;COMMERCIAL COLLECTION HEADER ;Payments_Execution_Engine
+DCLTO;COMMERCIAL COLLECTION TRAILER ;Payments_Execution_Engine
+DCNDL;Logging Conditions ;auxiliary
+DCNDO;Default Conditions Table ;Payments_Execution_Engine
+DCNIO;Def. Conditions Table Interim ;auxiliary
+DCNTL;Condition Types log file ;auxiliary
+DCNTO;Condition types table ;Payments_Execution_Engine
+DCONO;Condition Codes ;Payments_Execution_Engine
+DCOVO;MT202 Covers - Customer Data ;Payments_Execution_Engine
+DCPOO;SLAVE ACCOUNTS (CASH POOLING) ;Cash_Management_Engine
+DCTIO;Condition types table interim ;auxiliary
+DCTRO;CONDITIONS TRAILER RECORD ;Customer_Billing
+DDDCL;Direct debit contracts log ;auxiliary
+DDDCO;Direct debit contracts ;Instruction_and_Order_Management
+DDETO;Details of payments ;Payments_Execution_Engine
+DEBFO;ELECTRONIC BANKING FILES ;Instruction_and_Order_Management
+DEFIN;DEFINE SCR., DIC., ETC. ;auxiliary
+DFIDO;Clearing Files Detail Record ;Payments_Execution_Engine
+DFIMO;Clearing Files Header Record ;Payments_Execution_Engine
+DFRTO;Free Text ;Payments_Execution_Engine
+DFSCI;FI Settlements Contracts Int ;Payments_Execution_Engine
+DFSCL;FI Settlements Contracts Log ;auxiliary
+DFSCO;FI Settlements Contracts Inv ;Payments_Execution_Engine
+DFSII;FI Auto Sett Instructions ;Payments_Execution_Engine
+DFSIL;FI Auto Sett Instructions ;Payment Execution Engine
+DFSIO;FI Auto Sett Instruction INV ;Payments_Execution_Engine
+DGCAL;code group booking ;Payment Execution Engine
+DGCAO;code group booking ;Payments_Execution_Engine
+DIPTL;Pmt Trs Int Log file ;auxiliary
+DIPTO;Interim XBR Payment Trs file ;Payments_Execution_Engine
+DMSTO;MASTER ACCOUNTS (CASH POOLING) ;Cash_Management_Engine
+DPBDO;Payment Batch directory ;Payments_Execution_Engine
+DPFBK;Payment Feedback ;Payments_Execution_Engine
+DPTRL;Pmt Trs log file ;Payments_Execution_Engine
+DPTRO;INVENTORY OF XBR TRANSACTIONS ;Payments_Execution_Engine
+DRDIL;Recall Instruction Logging ;auxiliary
+DRDIO;Recall Instruction ;Payments_Execution_Engine
+DRPTO;Reporting structure XBR ;Payment Execution Engine
+DRSDO;Rejected Swift Messages Detail ;Instruction_and_Order_Management
+DRSMO;REJECTED SWIFT MESSAGE ;Instruction_and_Order_Management
+DSLVO;SLAVE ACCOUNTS (CASH POOLING) ;Cash_Management_Engine
+DSTAO;PAYMENT STATUS LOGGING ;Payments_Execution_Engine
+DSTIO;Standinf Orders - Interim File ;Payments_Execution_Engine
+DSTOL;STANDING ORDERS FILE ;auxiliary
+DSTOO;STANDING ORDERS FILE ;Payments_Execution_Engine
+DSTSO;Payment - Statistical Data ;Payments_Execution_Engine
 GBTDS;Batch Report Dest. Maintenance ;Core
 GBTPS;Batch Report Param. Mainten. ;Core
 GBTRO;Batch Report Run Conditions ;Core
 GCNVO;Conversion Codes Structure ;Core
 GMONO;security monitoring output ;Core
 GMSGS;ERROR TABLE ;Core
+GPAIO;Parameter Settings Interim ;auxiliary
+GPARL;Parameter Settings Logging ;auxiliary
 GPARO;Parameter Settings ;Core
+GPRTO;IFSPRINT TEXTS AND COMMANDS ;Customer_Reporting
 GRTPO;Real Time Program Definition ;Core
+GSADO;SAGE msg detail records ;Reference_Data_Manager
+GSAMO;SAGE msg header records ;Reference_Data_Manager
 GSBRO;Special Batch Run Conditions ;Core
+GSBSO;Special Batch Scheduling ;Core
+GSEML;Parameter Settings Logging ;auxiliary
 GSEMO;Parameter Settings ;Core
+GSWMO;Swift Message Status ;Reference_Data_Manager
 GXMLO;xml storage ;Core
-LPRCO;Pers.mmeber/RCE comb.structure ;Core
-PRSNL;PERSONNEL INFORMATION ;Core
-DBILO;Billing events for SEPA ;Customer Billing
-DCTRO;CONDITIONS TRAILER RECORD ;Customer Billing
-AADVO;Advices ;Customer Reporting
-AISTO;Indiv.Account Interest Statem. ;Customer Reporting
-ASPAS;Individual Acc.Statem.Param. ;Customer Reporting
-ATMPO;Advices Temporary ;Customer Reporting
-GPRTO;IFSPRINT TEXTS AND COMMANDS ;Customer Reporting
-ABCLO;Global FX Limits per Currency ;Financial Markets
-BASWO;Bond deal related asset swaps ;Financial Markets
-BBOKS;BOND Position Book ;Financial Markets
-BDLAO;Bond Accounting Status File ;Financial Markets
-BDLPO;Payment Status File ;Financial Markets
-BDLTO;Trailer Bond Deals ;Financial Markets
-BICTO;Bond Coupons ;Financial Markets
-BISPO;Bond Market Prices ;Financial Markets
-BITTO;Bond Trading-deal Trailers ;Financial Markets
-BPOTO;Bond Segments per Pos.Book ;Financial Markets
-BPRDO;Positions Product Code File ;Financial Markets
-BREDO;Redemption Dates & Conditions ;Financial Markets
-BREPO;Bond Collateral/Cash-records ;Financial Markets
-CEXRO;MT EXCHANGE RATE FILE ;Financial Markets
-IBDDO;Brokerage Volume Discount -det ;Financial Markets
-IBDHO;Brokerage Volume Discount-Head ;Financial Markets
-ICBRO;Conv. Broker id-IFS broker id ;Financial Markets
-ICVBS;Maint.conv.broker ctp-IFS ctp ;Financial Markets
-IERBS;Exch Rates Brokerage Commiss. ;Financial Markets
-IFASO;FRA Acctg Status file ;Financial Markets
-IFCPO;Fin. Futures Closing Prices ;Financial Markets
-IFFAO;Fin. Futures Accounting status ;Financial Markets
-IFFCO;Financial Futures Contracts ;Financial Markets
-IFFDO;Financial Futures Deals ;Financial Markets
-IFFOO;Financial Futures Offset contr ;Financial Markets
-IFFPO;Fin. Futures Payment status ;Financial Markets
-IFFTO;Financial Futures Tenor Dates ;Financial Markets
-IFFVO;Fin. Futures Variation Margin ;Financial Markets
-IFPSO;IRF Purchase and sale ;Financial markets
-IFRAO;FRA'S INVENTORY ;Financial markets
-IFRCL;FRA Confirm status log file ;Financial markets
-IFRCO;FRA Confirmations Status File ;Financial markets
-IFRPL;FRA Payment status log file ;Financial markets
-IFRPO;FRA payment status file ;Financial markets
-IFTCO;IRF contract tarrifs ;Financial markets
-IFTSO;IRF con. tarifs - Tenor spread ;Financial markets
-IFXAO;FX Accounting Status File ;Financial markets
-IFXCO;Foreign exchange contracts ;Financial markets
-IFXPO;FX payment status file ;Financial Markets
-IGIRO;General IRS contracts ;Financial markets
-IGLDO;General loan/deposit contracts ;Financial Markets
-ILDAO;LOANS/DEPOSIT ACC. STAT. FILE ;Financial Markets
-ILDPO;LD payment status file ;Financial Markets
-ILNGS;Maintain longtext ;Financial Markets
-ILPAO;Liquidation parameter ;Financial Markets
-IMAGO;Master Agreement per customer ;Financial Markets
-INETO;Payment netting ;Financial Markets
-INOSO;Nostro file ;Financial Markets
-INVMO;Nostro Value Movements ;Financial Markets
-IOASO;Ccy Opt Acctg Status file ;Financial Markets
-IODUS;Maintain overdue date ;Financial Markets
-IOPCO;Ccy Opt Conf Status file ;Financial Markets
-IOPPO;Ccy Opt Payment Status file ;Financial Markets
-IOPTS;Currency Options Contracts ;Financial Markets
-IPIBO;Informations of ICNFO ;Financial Markets
-IPIIO;Payment instructions ;Financial Markets
-IPMTO;Payment decision table ;Financial Markets
-IPTIO;Payment instructions ;Financial Markets
-IPWDO;Payment working days ;Financial Markets
-IRCVO;Reuters conversations ;Financial markets
-IRFRO;REFERENCE RATES OUTPUT ;Financial Markets
-IRSAO;IRS accounting status file ;Financial Markets
-IRSCO;IRS confirmation status file ;Financial Markets
-IRSPO;IRS payment status file ;Financial Markets
-ISIFO;Stndard instructions Free txt ;Financial Markets
-ISPIO;Standard Payment Instructions ;Financial Markets
-ITECO;TECTEL INFO ;Financial Markets
-ITIRO;Trailer IRS contracts ;Financial Markets
-IWARO;Warning date decision table ;Financial Markets
-IWODL;Warning working dayd log file ;Financial Markets
-IWODO;Warning working days ;Financial Markets
-IWSSO;WSS deal number ;Financial Markets
-LBRCS;Brokerage Commissions ;Financial Markets
-DCBRO;CBD trans reporting for SEPA ;Financial Reporting
-ABA1S;INTERNAL BASE ACCOUNT ;General Ledger
-ABKTS;AUTOMATIC BOOKING TABLE ;General ledger
-ABUDS;Bufget per Ledger Rubric ;General ledger
-ADLGS;Maint Det.Acc.per Ledger Rubr. ;General ledger
-ADSNS;P/L Distribution Key Dict. ;General ledger
-AFOLO;Folders Directory ;General Ledger
-AGEXS;General Expence Rubric Input ;General ledger
-AJSTO;Justif. Accounts/inventory ;General Ledger
-ALGRS;Ledger Definition ;General ledger
-AMDCO;Multiple D/C Folders ;General Ledger
-ANEUO;NEUTRALISED ACCOUNTS ;General Ledger
-ARBRO;Ledger Rubric Table ;general ledger
-ARCDO;RCE's per P/L Distrib. Key ;general ledger
-AROTO; ;General Ledger
-ASTDO;Statistic Decission Table ;General Ledger
-ATRCS;ACCOUNTING TRANS. CONTENTS ;General Ledger
-ATRTS;ACCOUNTING EVENT TYPES FILE ;General ledger
-LPRFS;Profit Centers ;General Ledger
-LRCEO;Respons. Centre Structures ;General Ledger
-LRCES;RESPONSIBILITY CENTER ;General Ledger
-LSUPS;Suppliers Maintenance ;General Ledger
-XFXAS;fixed assets maintenance ;General Ledger
-XFXCO;fixed assets categories ;General Ledger
-XFXTO;Fixed Assets Trailer ;General Ledger
-XGBAO;GEX Balances/Supplier,PMM ;General Ledger
-XGBUO;General Expenses Budgets ;General Ledger
-XGDCS;General Exp. Document Input ;General Ledger
-XGMVO;GEX Movements ;General Ledger
-XGPAO;Gen. Exp. Payments structure ;General Ledger
-XGPMO;Personnel Member Distribution ;General Ledger
-XHVBO;GEX Suppl/PMM Val.Bal.History ;General Ledger
-DBATO;BATCH PARAMETERS ;Instruction&Order Management
-DDDCO;Direct debit contracts ;Instruction&Order Management
-DEBFO;ELECTRONIC BANKING FILES ;Instruction&Order Management
-DRSDO;Rejected Swift Messages Detail ;Instruction&Order Management
-DRSMO;REJECTED SWIFT MESSAGE ;Instruction&Order Management
-CC3PO;Commission 3RD Parties ;Lending
-CCBRO;Risk At Close of Business ;Lending
-CCFPO;Cash flow position Comm.loans ;Lending
-CCGRS;COMMISSION GROUPS DICTIONARY ;Lending
-CCMHO;Commercial loans Header record ;Lending
-CCOCO;Commission Due Dates ;Lending
-CCOMS;Commissions non-automated ;Lending
-CCORO;Commission Revision Schedule ;Lending
-CCREO;Commission Results Structure ;Lending
-CEXSO;Excess/Out of order ;Lending
-CFACO;FUS' FACILITIES STRUCTURE ;Lending
-CFACS;Facilities ;Lending
-CFDDO;Fee Due Dates per Fee Type ;Lending
-CFFEO;Facility per Comm.Type ;Lending
-CFRSO;Facility Reduction Schedule ;Lending
-CFUSO;FOLLOW UP SYSTEM ;Lending
-CFXRO;Fac.comm. Multidrawing Ccy ;Lending
-CGATO;Guarantees Given Booking ;Lending
-CGUAS;GUARANTEES EMITTED ;Lending
-CGUCO;Guarantee commission due dates ;Lending
-CGURO;Guarantee Reduction Schedule ;Lending
-CMRGO;Customer Margin ;Lending
-CMTBO;UNDERLYING CONTACTS MT ;Lending
-CMTLO;Trailer commercial loans ;Lending
-COMSO;Status file Commercial Loans ;Lending
-CPTIO;Commercial loans paym.instr. ;Lending
-CREPO;Warranties & Representations ;Lending
-CREXO;RIS Exception Table ;lending
-CRISO;Risk View ;Lending
-CROCO;RAROC INFORMATION ;lending
-CRTRO;Real Time Risk Structure ;lending
-CSIMS;Simplified inv. Commercial ;Lending
-CSLFO; ;Lending
-ISIMO;Simplified Inventory Structure ;Lending
-LBROS;Broker File Maintenance ;Party Management
-LCBNS;Counterparty Basenumber File ;Party Management
-LCORO;BCOR SWIFT-Addresses ;Party Management
-LCPSS;Counterparty Structure Descrip ;Party Management
-LCTIO;CTP/BBL Base Account Main. ;Party Management
-LCTPS;Counterparty File Maintenance ;Party Management
-LCTSO;Counterparty Structures ;Party Management
-LELCS;Electronical Address File ;Party Management
-LELIO;Electronic Address Maintenance ;Party Management
-LPHIO;Electronic Address Maintenance ;Party Management
-LPHYS;Physical Address File Mainten. ;Party Management
-LPSNS;Person File Maintenance ;Party Management
-DCBDO;Batch information ;Payment Execution Engine
-DCBMO;Eurochannel reference table ;Payment Execution Engine
-DCLHO;COMMERCIAL COLLECTION HEADER ;Payment Execution Engine
-DCLTO;COMMERCIAL COLLECTION TRAILER ;Payment Execution Engine
-DCNDO;Default Conditions Table ;Payment Execution Engine
-DCNTO;Condition types table ;Payment Execution Engine
-DCONO;Condition Codes ;Payment Execution Engine
-DCOVO;MT202 Covers - Customer Data ;Payment Execution Engine
-DDETO;Details of payments ;Payment Execution Engine
-DFIDO;Clearing Files Detail Record ;Payment Execution Engine
-DFIMO;Clearing Files Header Record ;Payment Execution Engine
-DFRTO;Free Text ;Payment Execution Engine
-DFSCI;FI Settlements Contracts Int ;Payment Execution Engine
-DFSCO;FI Settlements Contracts Inv ;Payment Execution Engine
-DFSII;FI Auto Sett Instructions ;Payment Execution Engine
-DFSIO;FI Auto Sett Instruction INV ;Payment Execution Engine
-DGCAO;code group booking ;Payment Execution Engine
-DIPTO;Interim XBR Payment Trs file ;Payment Execution Engine
-DPBDO;Payment Batch directory ;Payment Execution Engine
-DPFBK;Payment Feedback ;Payment Execution Engine
-DPTRL;Pmt Trs log file ;Payment Execution Engine
-DPTRO;INVENTORY OF XBR TRANSACTIONS ;Payment Execution Engine
-DRDIO;Recall Instruction ;Payment Execution Engine
-DSTAO;PAYMENT STATUS LOGGING ;Payment Execution Engine
-DSTIO;Standinf Orders - Interim File ;Payment Execution Engine
-DSTOO;STANDING ORDERS FILE ;Payment Execution Engine
-DSTSO;Payment - Statistical Data ;Payment Execution Engine
-IAUTO;Autorisation decision table ;Payment Execution Engine
-LTARO;Target 2 Directory Table ;Payment Execution Engine
-RCHDS;Clear. Chq. Batch Dir. Maint. ;Payment Execution Engine
-RCHQS;Cleared Cheque Maintenance ;Payment Execution Engine
-RCHRO;CHEQUE REQUESTS ;Payment Execution Engine
-APPNO;Product per Nature Code ;Product Management
-LPRDS;Oper.Product Codes Dictionary ;Product Management
-GSBSO;Special Batch Scheduling ;Reconciliation Engine
-IACCO;Account identification stmt ;Reconciliation Engine
-ICNDO;Confirmation decision table ;Reconciliation Engine
-ICNFO;Our and their confirmation ;Reconciliation Engine
-ICNFS;Mtn confirmation texts ;Reconciliation Engine
-ICOPO;COMP payment status file ;Reconciliation Engine
-IFCSO;FX CONF. STATUS FILE ;Reconciliation Engine
-IFUPS;Follow-up parameters statement ;Reconciliation Engine
-ILDCL;L/D CONF STATUS LOG FILE ;Reconciliation Engine
-ILDCO;LD confirmation status file ;Reconciliation Engine
-ISTLO;Statement line ;Reconciliation Engine
-ISTMO;Statement ;Reconciliation Engine
-ITCFO;INDICATION TABLE CLOSE FIT ;Reconciliation Engine
-ITOLO;TOLERANCES OUTPUT ;Reconciliation Engine
-AEXRS;Acc. Exch. Rates - Occas.Input ;Reference data
-ASTMO;Statement History ;Reference Data
-ATDCS;Bkg.Entries Free Text Maint. ;Reference Data
-ISWCO;Swift conversion output ;Reference Data
-LBGRS;Branch Group Description ;Reference Data
-LBRAS;Branch master file ;Reference Data
-LCCCS;Currency / Country LCCCS ;Reference data
-LCCYS;Currency File Maintenance ;Reference data
-LCGRS;Country Group Maintenance ;Reference data
-LCIYS;City File ;Reference data
-LCLIS;Country Limit Maintenance ;Reference Data
-LCRYS;Country File Maintenance ;Reference Data
-LCSTS;Country / Country Group LCSTS ;Reference Data
-LGRDO;GRID table ;Reference Data
-LGXFO;Grid Xreference ;Reference Data
-LHOLO;Holiday File ;Reference Data
-LRESS;Oper. Result Codes Dictionary ;Reference Data
-REFFL;REFERENCE FILE STRUCTURE ;Reference Data
-GSADO;SAGE msg detail records ;Reference data
-GSAMO;SAGE msg header records ;Reference data
-GSWMO;Swift Message Status ;Reference data
-IBATO;Batch directory PMT/CNF/ACC ;
-ADEIO;Indiv.Cust. Account Maint. Int ;Account Management
-BDLGO;Bond Deals Inventory ;Financial Markets
-BISSO;Bond Issuances Inventory ;Financial Markets
-BRPIO;Interim REPO collateral file ;Financial Markets
-BSPIO;STANDARD PAYMENT INSTR. BONDS ;Financial Markets
-CC3PL;Commission 3rd Party ;Financial Markets
-CCRXO;RXM CUSTOMER LINK ;Financial Markets
-CCUSO;Share Trading : Custodian Def. ;Financial Markets
-CMTCO;Margin Trading deals ;Financial Markets
-CMTCS;MARGIN TRADING CUSTOMER ;Financial Markets
-CPBCO;Private Banking Customer Def. ;Financial Markets
-CPBPO;Private Banking Portfolio ;Financial Markets
-CRXMO;RXM CONTRACTS ;Financial Markets
-CSHAO;Customer Share Inventory ;Financial Markets
-CSHCO;Share Charges Definition ;Financial Markets
-CSHDS;Share Dealtype Definition ;Financial Markets
-CSHOO;SHARE TRADIN OPTIONS STRUCTURE ;Financial Markets
-CSHRO;Replace Share deals ;Financial Markets
-CSHTO;Share Type Inventory ;Financial Markets
-CSHVO;SHARE TRADING DIVIDENDS ;Financial Markets
-CSSHO;Security Share Portfolio ;Financial Markets
+IACCO;Account identification stmt ;Reconciliation_Engine
+IAUTL;Logging IAUTO ;auxiliary
+IAUTO;Autorisation decision table ;Payments_Execution_Engine
+IBATO;Batch directory PMT/CNF/ACC ;Current_Account_Engine
+IBBDO;BTS BATCH DIRECTORY FILE ;auxiliary
+IBDDO;Brokerage Volume Discount -det ;Financial_Markets_Trade_engine
+IBDHO;Brokerage Volume Discount-Head ;Financial_Markets_Trade_engine
+ICBRO;Conv. Broker id-IFS broker id ;Financial_Markets_Trade_engine
+ICNDL;Logging ICNDO ;auxiliary
+ICNDO;Confirmation decision table ;Reconciliation_Engine
+ICNFL;Logging ICNFS ;auxiliary
+ICNFO;Our and their confirmation ;Reconciliation_Engine
+ICNFS;Mtn confirmation texts ;Reconciliation_Engine
+ICOPL;COMP payment status log file ;auxiliary
+ICOPO;COMP payment status file ;Reconciliation_Engine
+ICVBS;Maint.conv.broker ctp-IFS ctp ;Financial_Markets_Trade_engine
+IDPLO;DAILY P / L ;General_Ledger
+IERBS;Exch Rates Brokerage Commiss. ;Financial_Markets_Trade_engine
+IERMO;Error message file load Boston ;auxiliary
+IFASO;FRA Acctg Status file ;Financial_Markets_Trade_engine
+IFCPO;Fin. Futures Closing Prices ;Financial_Markets_Trade_engine
+IFCSL;FX LOGGING FILE ;auxiliary
+IFCSO;FX CONF. STATUS FILE ;Reconciliation_Engine
+IFFAO;Fin. Futures Accounting status ;Financial_Markets_Trade_engine
+IFFCL;Log IRF Contract ;auxiliary
+IFFCO;Financial Futures Contracts ;Financial_Markets_Trade_engine
+IFFDL;Financial Futures Deals Log ;auxiliary
+IFFDO;Financial Futures Deals ;Financial_Markets_Trade_engine
+IFFOO;Financial Futures Offset contr ;Financial_Markets_Trade_engine
+IFFPO;Fin. Futures Payment status ;Financial_Markets_Trade_engine
+IFFTO;Financial Futures Tenor Dates ;Financial_Markets_Trade_engine
+IFFVO;Fin. Futures Variation Margin ;Financial_Markets_Trade_engine
+IFPSO;IRF Purchase and sale ;Financial_Markets_Trade_engine
+IFRAL;Log File FRA'S ;auxiliary
+IFRAO;FRA'S INVENTORY ;Financial_Markets_Trade_engine
+IFRCL;FRA Confirm status log file ;Financial_Markets_Trade_engine
+IFRCO;FRA Confirmations Status File ;Financial_Markets_Trade_engine
+IFRPL;FRA Payment status log file ;Financial_Markets_Trade_engine
+IFRPO;FRA payment status file ;Financial_Markets_Trade_engine
+IFTCO;IRF contract tarrifs ;Financial_Markets_Trade_engine
+IFTSO;IRF con. tarifs - Tenor spread ;Financial_Markets_Trade_engine
+IFUPS;Follow-up parameters statement ;Reconciliation_Engine
+IFXAO;FX Accounting Status File ;Financial_Markets_Trade_engine
 IFXCL;FX CONTRACT LOG FILE ;Financial markets
+IFXCO;Foreign exchange contracts ;Financial_Markets_Trade_engine
+IFXPL;forex payment status log file ;auxiliary
+IFXPO;FX payment status file ;Financial_Markets_Trade_engine
+IGIRO;General IRS contracts ;Financial_Markets_Trade_engine
+IGLDO;General loan/deposit contracts ;Financial_Markets_Trade_engine
+IHMCL;Logging IHMCS ;auxiliary
+IHMCS;Maintain header mail confirm. ;auxiliary
 IICSO;interim conf. status file ;Financial Markets
-IIFFO;Interim file Financial Futures ;Financial Markets
-IIFRO;Intermi file FRA ;Financial Markets
-IIFXO;Interim file Foreign exchange ;Financial Markets
+IIFFO;Interim file Financial Futures ;financial markets
+IIFRO;Intermi file FRA ;financial markets
+IIFXO;Interim file Foreign exchange ;financial markets
+IILDO;Interim file loan/deposits ;auxiliary
+IINIO;Interest base rates intrerim ;auxiliary
+IINTL;Logging IINTO ;auxiliary
+IINTO;Interest base rates ;Current_Account_Engine
 IIOPO;Interim file for Options ;Financial Markets
 IIPIO;Interim file payment instr. ;Financial Markets
 IIRSO;Interim file IRS contracts ;Financial Markets
-IRSPL;IRS payment status log file ;Financial Markets
-IDPLO;DAILY P / L ;general ledger
-CEXPS;Commercial Explication Invent. ;Lending
-CFATO;Facil. booking entries ;Lending
-CFCRO;Facility Comm. Date/Amount ;Lending
-CGURL;Guarantee reduction sched. LOG ;Lending
-CHFCO;History of Fee Calcul. Basis ;Lending
-CREPL;Warranties & Representations ;Lending
-CROCL;RAROC INFORMATION ;lending
+ILDAO;LOANS/DEPOSIT ACC. STAT. FILE ;Financial_Markets_Trade_engine
+ILDCL;L/D CONF STATUS LOG FILE ;Reconciliation_Engine
+ILDCO;LD confirmation status file ;Reconciliation_Engine
+ILDPL;l/d Payment status log file ;auxiliary
+ILDPO;LD payment status file ;Financial_Markets_Trade_engine
+ILDTL;Loan/deposits transactions Log ;auxiliary
+ILNGL;Logging ILNGS ;auxiliary
+ILNGS;Maintain longtext ;Financial_Markets_Trade_engine
+ILPAL;Liquidation parameter log file ;auxiliary
+ILPAO;Liquidation parameter ;Financial_Markets_Trade_engine
+IMAGO;Master Agreement per customer ;Financial_Markets_Trade_engine
+INETL;Payment netting ;auxiliary
+INETO;Payment netting ;Financial_Markets_Trade_engine
+INOSL;Nostro log file ;auxiliary
+INOSO;Nostro file ;Financial_Markets_Trade_engine
+INVMO;Nostro Value Movements ;Financial_Markets_Trade_engine
+IOASO;Ccy Opt Acctg Status file ;Financial_Markets_Trade_engine
+IODUL;LOGGING IODUS ;auxiliary
+IODUS;Maintain overdue date ;Financial_Markets_Trade_engine
+IOPCL;Ccy Opt Confirmation log file ;auxiliary
+IOPCO;Ccy Opt Conf Status file ;Financial_Markets_Trade_engine
+IOPPL;Ccy Opt Payment Status log fil ;auxiliary
+IOPPO;Ccy Opt Payment Status file ;Financial_Markets_Trade_engine
+IOPTL;Curr. Option Ctrcts Log file ;auxiliary
+IOPTS;Currency Options Contracts ;Financial_Markets_Trade_engine
+IPIBO;Informations of ICNFO ;Financial_Markets_Trade_engine
+IPIIO;Payment instructions ;Financial_Markets_Trade_engine
+IPMTL;Logging IPMTO ;auxiliary
+IPMTO;Payment decision table ;Financial_Markets_Trade_engine
+IPTIL;Payment instructions log ;auxiliary
+IPTIO;Payment instructions ;Financial_Markets_Trade_engine
+IPWDL;payment working days log file ;auxiliary
+IPWDO;Payment working days ;Financial_Markets_Trade_engine
+IRCVO;Reuters conversations ;Financial_Markets_Trade_engine
+IRFRL;LOGGING REFERENCE RATES IRFRO ;auxiliary
+IRFRO;REFERENCE RATES OUTPUT ;Financial_Markets_Trade_engine
+IRSAO;IRS accounting status file ;Financial_Markets_Trade_engine
+IRSCL;IRS confirmation status log ;auxiliary
+IRSCO;IRS confirmation status file ;Financial_Markets_Trade_engine
+IRSPL;IRS payment status log file ;financial markets
+IRSPO;IRS payment status file ;Financial_Markets_Trade_engine
+IRSWL;IRS log file ;auxiliary
+ISAVO;Savekey's offline search ;auxiliary
+ISIFO;Stndard instructions Free txt ;Financial_Markets_Trade_engine
+ISIML;Logging ISIMO ;auxiliary
+ISIMO;Simplified Inventory Structure ;Business_Lending_Engine
+ISPIL;Standard Payment Istr log file ;auxiliary
+ISPIO;Standard Payment Instructions ;Financial_Markets_Trade_engine
+ISTLO;Statement line ;Reconciliation_Engine
+ISTMO;Statement ;Reconciliation_Engine
+ISWCO;Swift conversion output ;Reference_Data_Manager
+ITCFO;INDICATION TABLE CLOSE FIT ;Reconciliation_Engine
+ITECO;TECTEL INFO ;Financial_Markets_Trade_engine
+ITIRO;Trailer IRS contracts ;Financial_Markets_Trade_engine
+ITITL;Titrisation logging ;auxiliary
+ITITO;Titrisation ;Lending | financial markets
 ITLDO;Trailer loan/deposits contract ;lending
-ITITO;Titrisation ;Lending | Financial Markets
-LEBAO;EBA Clearers ;Party Management
-DFSIL;FI Auto Sett Instructions ;Payment Execution Engine
-DGCAL;code group booking ;Payment Execution Engine
-DRPTO;Reporting structure XBR ;Payment Execution Engine
+ITOLL;LOGGING ITOLM ;auxiliary
+ITOLO;TOLERANCES OUTPUT ;Reconciliation_Engine
+ITXTO;FREE TEXT ;auxiliary
+IWARL;Logging IWARO ;auxiliary
+IWARO;Warning date decision table ;Financial_Markets_Trade_engine
+IWODL;Warning working dayd log file ;Financial_Markets_Trade_engine
+IWODO;Warning working days ;Financial_Markets_Trade_engine
+IWSSO;WSS deal number ;Financial_Markets_Trade_engine
+LBGRL;Logging LBGRS ;auxiliary
+LBGRS;Branch Group Description ;Reference_Data_Manager
 LBIRO;BIREL Directory ;Payment Execution Engine
+LBRAL;Logging LBRAS ;auxiliary
+LBRAS;Branch master file ;Reference_Data_Manager
+LBRCL;Logging LBRCS ;auxiliary
+LBRCS;Brokerage Commissions ;Financial_Markets_Trade_engine
+LBROL;Logging LBROS ;auxiliary
+LBROS;Broker File Maintenance ;Party_Management
+LBSKL;Logging LBSKS ;auxiliary
+LBSKS; ;auxiliary
+LCBNL;Logging LCBNS ;auxiliary
+LCBNS;Counterparty Basenumber File ;Party_Management
+LCCCL;Logging LCCCS ;auxiliary
+LCCCS;Currency / Country LCCCS ;Reference_Data_Manager
+LCCYL;Logging LCCYS ;auxiliary
+LCCYS;Currency File Maintenance ;Reference_Data_Manager
+LCGRL;Logging LCGRS ;auxiliary
+LCGRS;Country Group Maintenance ;Reference_Data_Manager
+LCIYL;Logging City ;auxiliary
+LCIYS;City File ;Reference_Data_Manager
+LCLIL;Logging LCLIS ;auxiliary
+LCLIS;Country Limit Maintenance ;Reference_Data_Manager
+LCORO;BCOR SWIFT-Addresses ;Party_Management
+LCPSL;Logging LCPSS ;auxiliary
+LCPSS;Counterparty Structure Descrip ;Party_Management
+LCRYL;Logging LCRYS ;auxiliary
+LCRYS;Country File Maintenance ;Reference_Data_Manager
+LCSTL;Logging LCSTS ;auxiliary
+LCSTS;Country / Country Group LCSTS ;Reference_Data_Manager
+LCTIO;CTP/BBL Base Account Main. ;Party_Management
+LCTPL;Logging LCTPS ;auxiliary
+LCTPS;Counterparty File Maintenance ;Party_Management
+LCTSL;Logging LCTSO ;auxiliary
+LCTSO;Counterparty Structures ;Party_Management
+LEBAO;EBA Clearers ;Party Management
+LELCL;Logging LELCS ;auxiliary
+LELCS;Electronical Address File ;Party_Management
+LELIO;Electronic Address Maintenance ;Party_Management
+LGRDL;GRID logging ;auxiliary
+LGRDO;GRID table ;Reference_Data_Manager
+LGXFL;GRID xreference logging ;auxiliary
+LGXFO;Grid Xreference ;Reference_Data_Manager
+LHOLL;Logging LHOLS ;auxiliary
+LHOLO;Holiday File ;Reference_Data_Manager
+LPHIO;Electronic Address Maintenance ;Party_Management
+LPHYL;Logging ;auxiliary
+LPHYS;Physical Address File Mainten. ;Party_Management
+LPMML;PRSNL LOGGING STRUCTURE ;auxiliary
+LPRCL;Logging LPRCM ;auxiliary
+LPRCO;Pers.mmeber/RCE comb.structure ;Core
+LPRDL;Logging LPRDS ;auxiliary
+LPRDS;Oper.Product Codes Dictionary ;Product_Management
+LPRFS;Profit Centers ;General_Ledger
+LPSIO;Electronic Address Maintenance ;auxiliary
+LPSNL;Logging LPSNS ;auxiliary
+LPSNS;Person File Maintenance ;Party_Management
+LRCEL;Logging LRCES ;auxiliary
+LRCEO;Respons. Centre Structures ;General_Ledger
+LRCES;RESPONSIBILITY CENTER ;General_Ledger
+LRCLL;Logging LRCEM - Resp.Cent.Str. ;auxiliary
+LRESS;Oper. Result Codes Dictionary ;Reference_Data_Manager
+LSUPL;Supplier Logging ;auxiliary
+LSUPS;Suppliers Maintenance ;General_Ledger
+LTARO;Target 2 Directory Table ;Payments_Execution_Engine
+MNDEF;HIERARCHICAL MENU'S - DUTCH ;auxiliary
+NWSMN;NEWS MAINTENANCE ;auxiliary
+PRNTR;PRINTERS ;auxiliary
+PRSIO; ;auxiliary
+PRSNL;PERSONNEL INFORMATION ;Core
+RCHDS;Clear. Chq. Batch Dir. Maint. ;Payments_Execution_Engine
+RCHQS;Cleared Cheque Maintenance ;Payments_Execution_Engine
+RCHRO;CHEQUE REQUESTS ;Payments_Execution_Engine
+REFFL;REFERENCE FILE STRUCTURE ;Reference_Data_Manager
+RPDEF;REPORT DEFINITION ;auxiliary
+RPSCH;REPORT SCHEDULING ;auxiliary
+RSTRT;REPORT RESTART STRUCTURE ;auxiliary
+SECIO; ;auxiliary
+SECRL; ;auxiliary
+SECUR;SECURITY US OUTPUT ISPEC ;auxiliary
+TSHNO;Taking-Over.Short Name Conver. ;auxiliary
+XFXAS;fixed assets maintenance ;General_Ledger
+XFXCO;fixed assets categories ;General_Ledger
+XFXTO;Fixed Assets Trailer ;General_Ledger
+XGBAO;GEX Balances/Supplier,PMM ;General_Ledger
+XGBUL;General Expenses Budget Logg. ;auxiliary
+XGBUO;General Expenses Budgets ;General_Ledger
+XGDCL;GEX Documents Logging ;auxiliary
+XGDCS;General Exp. Document Input ;General_Ledger
+XGMVL;GEX Movements Logging ;auxiliary
+XGMVO;GEX Movements ;General_Ledger
+XGPAL;Gen. Exp. Payments Logging ;auxiliary
+XGPAO;Gen. Exp. Payments structure ;General_Ledger
+XGPML;Personnel Member Distribution ;auxiliary
+XGPMO;Personnel Member Distribution ;General_Ledger
+XHVBO;GEX Suppl/PMM Val.Bal.History ;General_Ledger
