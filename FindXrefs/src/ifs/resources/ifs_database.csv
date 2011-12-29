@@ -1,0 +1,309 @@
+ADETS;Indiv.Customer Account Maint. ;Account Management
+AEVTO;Acg.Event Transaction data (Accounting event real time) ;Account Management
+AHLBO;Det. Acc. Ledger Balance ;Account Management
+AHVBO;Detailed Account Value Balance ;Account Management
+AMVTO;Detail Accounting Movements ;Account Management
+ANTUS;Accounting Nature Code ;Account Management
+ARESS;Indiv. Acc. Results History ;Account Management
+ARETO;Indiv. Account General Param. ;Account Management
+ATAXO;Ind. Acc. Tax Cdt. History ;Account Management
+ATRDO;Acg.Transaction Data ;Account Management
+ATXCO;Tax Condition Maintenance ;Account Management
+IINTO;Interest base rates ;Account Management
+AINTS;Account Interest Cond.Hist. ;Arragement Management
+DCPOO;SLAVE ACCOUNTS (CASH POOLING) ;Cash Management
+DMSTO;MASTER ACCOUNTS (CASH POOLING) ;Cash Management
+DSLVO;SLAVE ACCOUNTS (CASH POOLING) ;Cash Management
+CSCOO;Security Composition ;Collateral Management
+CSECS;Securities Maintenance part 1 ;Collateral Management
+GBTDS;Batch Report Dest. Maintenance ;Core
+GBTPS;Batch Report Param. Mainten. ;Core
+GBTRO;Batch Report Run Conditions ;Core
+GCNVO;Conversion Codes Structure ;Core
+GMONO;security monitoring output ;Core
+GMSGS;ERROR TABLE ;Core
+GPARO;Parameter Settings ;Core
+GRTPO;Real Time Program Definition ;Core
+GSBRO;Special Batch Run Conditions ;Core
+GSEMO;Parameter Settings ;Core
+GXMLO;xml storage ;Core
+LPRCO;Pers.mmeber/RCE comb.structure ;Core
+PRSNL;PERSONNEL INFORMATION ;Core
+DBILO;Billing events for SEPA ;Customer Billing
+DCTRO;CONDITIONS TRAILER RECORD ;Customer Billing
+AADVO;Advices ;Customer Reporting
+AISTO;Indiv.Account Interest Statem. ;Customer Reporting
+ASPAS;Individual Acc.Statem.Param. ;Customer Reporting
+ATMPO;Advices Temporary ;Customer Reporting
+GPRTO;IFSPRINT TEXTS AND COMMANDS ;Customer Reporting
+ABCLO;Global FX Limits per Currency ;Financial Markets
+BASWO;Bond deal related asset swaps ;Financial Markets
+BBOKS;BOND Position Book ;Financial Markets
+BDLAO;Bond Accounting Status File ;Financial Markets
+BDLPO;Payment Status File ;Financial Markets
+BDLTO;Trailer Bond Deals ;Financial Markets
+BICTO;Bond Coupons ;Financial Markets
+BISPO;Bond Market Prices ;Financial Markets
+BITTO;Bond Trading-deal Trailers ;Financial Markets
+BPOTO;Bond Segments per Pos.Book ;Financial Markets
+BPRDO;Positions Product Code File ;Financial Markets
+BREDO;Redemption Dates & Conditions ;Financial Markets
+BREPO;Bond Collateral/Cash-records ;Financial Markets
+CEXRO;MT EXCHANGE RATE FILE ;Financial Markets
+IBDDO;Brokerage Volume Discount -det ;Financial Markets
+IBDHO;Brokerage Volume Discount-Head ;Financial Markets
+ICBRO;Conv. Broker id-IFS broker id ;Financial Markets
+ICVBS;Maint.conv.broker ctp-IFS ctp ;Financial Markets
+IERBS;Exch Rates Brokerage Commiss. ;Financial Markets
+IFASO;FRA Acctg Status file ;Financial Markets
+IFCPO;Fin. Futures Closing Prices ;Financial Markets
+IFFAO;Fin. Futures Accounting status ;Financial Markets
+IFFCO;Financial Futures Contracts ;Financial Markets
+IFFDO;Financial Futures Deals ;Financial Markets
+IFFOO;Financial Futures Offset contr ;Financial Markets
+IFFPO;Fin. Futures Payment status ;Financial Markets
+IFFTO;Financial Futures Tenor Dates ;Financial Markets
+IFFVO;Fin. Futures Variation Margin ;Financial Markets
+IFPSO;IRF Purchase and sale ;Financial markets
+IFRAO;FRA'S INVENTORY ;Financial markets
+IFRCL;FRA Confirm status log file ;Financial markets
+IFRCO;FRA Confirmations Status File ;Financial markets
+IFRPL;FRA Payment status log file ;Financial markets
+IFRPO;FRA payment status file ;Financial markets
+IFTCO;IRF contract tarrifs ;Financial markets
+IFTSO;IRF con. tarifs - Tenor spread ;Financial markets
+IFXAO;FX Accounting Status File ;Financial markets
+IFXCO;Foreign exchange contracts ;Financial markets
+IFXPO;FX payment status file ;Financial Markets
+IGIRO;General IRS contracts ;Financial markets
+IGLDO;General loan/deposit contracts ;Financial Markets
+ILDAO;LOANS/DEPOSIT ACC. STAT. FILE ;Financial Markets
+ILDPO;LD payment status file ;Financial Markets
+ILNGS;Maintain longtext ;Financial Markets
+ILPAO;Liquidation parameter ;Financial Markets
+IMAGO;Master Agreement per customer ;Financial Markets
+INETO;Payment netting ;Financial Markets
+INOSO;Nostro file ;Financial Markets
+INVMO;Nostro Value Movements ;Financial Markets
+IOASO;Ccy Opt Acctg Status file ;Financial Markets
+IODUS;Maintain overdue date ;Financial Markets
+IOPCO;Ccy Opt Conf Status file ;Financial Markets
+IOPPO;Ccy Opt Payment Status file ;Financial Markets
+IOPTS;Currency Options Contracts ;Financial Markets
+IPIBO;Informations of ICNFO ;Financial Markets
+IPIIO;Payment instructions ;Financial Markets
+IPMTO;Payment decision table ;Financial Markets
+IPTIO;Payment instructions ;Financial Markets
+IPWDO;Payment working days ;Financial Markets
+IRCVO;Reuters conversations ;Financial markets
+IRFRO;REFERENCE RATES OUTPUT ;Financial Markets
+IRSAO;IRS accounting status file ;Financial Markets
+IRSCO;IRS confirmation status file ;Financial Markets
+IRSPO;IRS payment status file ;Financial Markets
+ISIFO;Stndard instructions Free txt ;Financial Markets
+ISPIO;Standard Payment Instructions ;Financial Markets
+ITECO;TECTEL INFO ;Financial Markets
+ITIRO;Trailer IRS contracts ;Financial Markets
+IWARO;Warning date decision table ;Financial Markets
+IWODL;Warning working dayd log file ;Financial Markets
+IWODO;Warning working days ;Financial Markets
+IWSSO;WSS deal number ;Financial Markets
+LBRCS;Brokerage Commissions ;Financial Markets
+DCBRO;CBD trans reporting for SEPA ;Financial Reporting
+ABA1S;INTERNAL BASE ACCOUNT ;General Ledger
+ABKTS;AUTOMATIC BOOKING TABLE ;General ledger
+ABUDS;Bufget per Ledger Rubric ;General ledger
+ADLGS;Maint Det.Acc.per Ledger Rubr. ;General ledger
+ADSNS;P/L Distribution Key Dict. ;General ledger
+AFOLO;Folders Directory ;General Ledger
+AGEXS;General Expence Rubric Input ;General ledger
+AJSTO;Justif. Accounts/inventory ;General Ledger
+ALGRS;Ledger Definition ;General ledger
+AMDCO;Multiple D/C Folders ;General Ledger
+ANEUO;NEUTRALISED ACCOUNTS ;General Ledger
+ARBRO;Ledger Rubric Table ;general ledger
+ARCDO;RCE's per P/L Distrib. Key ;general ledger
+AROTO; ;General Ledger
+ASTDO;Statistic Decission Table ;General Ledger
+ATRCS;ACCOUNTING TRANS. CONTENTS ;General Ledger
+ATRTS;ACCOUNTING EVENT TYPES FILE ;General ledger
+LPRFS;Profit Centers ;General Ledger
+LRCEO;Respons. Centre Structures ;General Ledger
+LRCES;RESPONSIBILITY CENTER ;General Ledger
+LSUPS;Suppliers Maintenance ;General Ledger
+XFXAS;fixed assets maintenance ;General Ledger
+XFXCO;fixed assets categories ;General Ledger
+XFXTO;Fixed Assets Trailer ;General Ledger
+XGBAO;GEX Balances/Supplier,PMM ;General Ledger
+XGBUO;General Expenses Budgets ;General Ledger
+XGDCS;General Exp. Document Input ;General Ledger
+XGMVO;GEX Movements ;General Ledger
+XGPAO;Gen. Exp. Payments structure ;General Ledger
+XGPMO;Personnel Member Distribution ;General Ledger
+XHVBO;GEX Suppl/PMM Val.Bal.History ;General Ledger
+DBATO;BATCH PARAMETERS ;Instruction&Order Management
+DDDCO;Direct debit contracts ;Instruction&Order Management
+DEBFO;ELECTRONIC BANKING FILES ;Instruction&Order Management
+DRSDO;Rejected Swift Messages Detail ;Instruction&Order Management
+DRSMO;REJECTED SWIFT MESSAGE ;Instruction&Order Management
+CC3PO;Commission 3RD Parties ;Lending
+CCBRO;Risk At Close of Business ;Lending
+CCFPO;Cash flow position Comm.loans ;Lending
+CCGRS;COMMISSION GROUPS DICTIONARY ;Lending
+CCMHO;Commercial loans Header record ;Lending
+CCOCO;Commission Due Dates ;Lending
+CCOMS;Commissions non-automated ;Lending
+CCORO;Commission Revision Schedule ;Lending
+CCREO;Commission Results Structure ;Lending
+CEXSO;Excess/Out of order ;Lending
+CFACO;FUS' FACILITIES STRUCTURE ;Lending
+CFACS;Facilities ;Lending
+CFDDO;Fee Due Dates per Fee Type ;Lending
+CFFEO;Facility per Comm.Type ;Lending
+CFRSO;Facility Reduction Schedule ;Lending
+CFUSO;FOLLOW UP SYSTEM ;Lending
+CFXRO;Fac.comm. Multidrawing Ccy ;Lending
+CGATO;Guarantees Given Booking ;Lending
+CGUAS;GUARANTEES EMITTED ;Lending
+CGUCO;Guarantee commission due dates ;Lending
+CGURO;Guarantee Reduction Schedule ;Lending
+CMRGO;Customer Margin ;Lending
+CMTBO;UNDERLYING CONTACTS MT ;Lending
+CMTLO;Trailer commercial loans ;Lending
+COMSO;Status file Commercial Loans ;Lending
+CPTIO;Commercial loans paym.instr. ;Lending
+CREPO;Warranties & Representations ;Lending
+CREXO;RIS Exception Table ;lending
+CRISO;Risk View ;Lending
+CROCO;RAROC INFORMATION ;lending
+CRTRO;Real Time Risk Structure ;lending
+CSIMS;Simplified inv. Commercial ;Lending
+CSLFO; ;Lending
+ISIMO;Simplified Inventory Structure ;Lending
+LBROS;Broker File Maintenance ;Party Management
+LCBNS;Counterparty Basenumber File ;Party Management
+LCORO;BCOR SWIFT-Addresses ;Party Management
+LCPSS;Counterparty Structure Descrip ;Party Management
+LCTIO;CTP/BBL Base Account Main. ;Party Management
+LCTPS;Counterparty File Maintenance ;Party Management
+LCTSO;Counterparty Structures ;Party Management
+LELCS;Electronical Address File ;Party Management
+LELIO;Electronic Address Maintenance ;Party Management
+LPHIO;Electronic Address Maintenance ;Party Management
+LPHYS;Physical Address File Mainten. ;Party Management
+LPSNS;Person File Maintenance ;Party Management
+DCBDO;Batch information ;Payment Execution Engine
+DCBMO;Eurochannel reference table ;Payment Execution Engine
+DCLHO;COMMERCIAL COLLECTION HEADER ;Payment Execution Engine
+DCLTO;COMMERCIAL COLLECTION TRAILER ;Payment Execution Engine
+DCNDO;Default Conditions Table ;Payment Execution Engine
+DCNTO;Condition types table ;Payment Execution Engine
+DCONO;Condition Codes ;Payment Execution Engine
+DCOVO;MT202 Covers - Customer Data ;Payment Execution Engine
+DDETO;Details of payments ;Payment Execution Engine
+DFIDO;Clearing Files Detail Record ;Payment Execution Engine
+DFIMO;Clearing Files Header Record ;Payment Execution Engine
+DFRTO;Free Text ;Payment Execution Engine
+DFSCI;FI Settlements Contracts Int ;Payment Execution Engine
+DFSCO;FI Settlements Contracts Inv ;Payment Execution Engine
+DFSII;FI Auto Sett Instructions ;Payment Execution Engine
+DFSIO;FI Auto Sett Instruction INV ;Payment Execution Engine
+DGCAO;code group booking ;Payment Execution Engine
+DIPTO;Interim XBR Payment Trs file ;Payment Execution Engine
+DPBDO;Payment Batch directory ;Payment Execution Engine
+DPFBK;Payment Feedback ;Payment Execution Engine
+DPTRL;Pmt Trs log file ;Payment Execution Engine
+DPTRO;INVENTORY OF XBR TRANSACTIONS ;Payment Execution Engine
+DRDIO;Recall Instruction ;Payment Execution Engine
+DSTAO;PAYMENT STATUS LOGGING ;Payment Execution Engine
+DSTIO;Standinf Orders - Interim File ;Payment Execution Engine
+DSTOO;STANDING ORDERS FILE ;Payment Execution Engine
+DSTSO;Payment - Statistical Data ;Payment Execution Engine
+IAUTO;Autorisation decision table ;Payment Execution Engine
+LTARO;Target 2 Directory Table ;Payment Execution Engine
+RCHDS;Clear. Chq. Batch Dir. Maint. ;Payment Execution Engine
+RCHQS;Cleared Cheque Maintenance ;Payment Execution Engine
+RCHRO;CHEQUE REQUESTS ;Payment Execution Engine
+APPNO;Product per Nature Code ;Product Management
+LPRDS;Oper.Product Codes Dictionary ;Product Management
+GSBSO;Special Batch Scheduling ;Reconciliation Engine
+IACCO;Account identification stmt ;Reconciliation Engine
+ICNDO;Confirmation decision table ;Reconciliation Engine
+ICNFO;Our and their confirmation ;Reconciliation Engine
+ICNFS;Mtn confirmation texts ;Reconciliation Engine
+ICOPO;COMP payment status file ;Reconciliation Engine
+IFCSO;FX CONF. STATUS FILE ;Reconciliation Engine
+IFUPS;Follow-up parameters statement ;Reconciliation Engine
+ILDCL;L/D CONF STATUS LOG FILE ;Reconciliation Engine
+ILDCO;LD confirmation status file ;Reconciliation Engine
+ISTLO;Statement line ;Reconciliation Engine
+ISTMO;Statement ;Reconciliation Engine
+ITCFO;INDICATION TABLE CLOSE FIT ;Reconciliation Engine
+ITOLO;TOLERANCES OUTPUT ;Reconciliation Engine
+AEXRS;Acc. Exch. Rates - Occas.Input ;Reference data
+ASTMO;Statement History ;Reference Data
+ATDCS;Bkg.Entries Free Text Maint. ;Reference Data
+ISWCO;Swift conversion output ;Reference Data
+LBGRS;Branch Group Description ;Reference Data
+LBRAS;Branch master file ;Reference Data
+LCCCS;Currency / Country LCCCS ;Reference data
+LCCYS;Currency File Maintenance ;Reference data
+LCGRS;Country Group Maintenance ;Reference data
+LCIYS;City File ;Reference data
+LCLIS;Country Limit Maintenance ;Reference Data
+LCRYS;Country File Maintenance ;Reference Data
+LCSTS;Country / Country Group LCSTS ;Reference Data
+LGRDO;GRID table ;Reference Data
+LGXFO;Grid Xreference ;Reference Data
+LHOLO;Holiday File ;Reference Data
+LRESS;Oper. Result Codes Dictionary ;Reference Data
+REFFL;REFERENCE FILE STRUCTURE ;Reference Data
+GSADO;SAGE msg detail records ;Reference data
+GSAMO;SAGE msg header records ;Reference data
+GSWMO;Swift Message Status ;Reference data
+IBATO;Batch directory PMT/CNF/ACC ;
+ADEIO;Indiv.Cust. Account Maint. Int ;Account Management
+BDLGO;Bond Deals Inventory ;Financial Markets
+BISSO;Bond Issuances Inventory ;Financial Markets
+BRPIO;Interim REPO collateral file ;Financial Markets
+BSPIO;STANDARD PAYMENT INSTR. BONDS ;Financial Markets
+CC3PL;Commission 3rd Party ;Financial Markets
+CCRXO;RXM CUSTOMER LINK ;Financial Markets
+CCUSO;Share Trading : Custodian Def. ;Financial Markets
+CMTCO;Margin Trading deals ;Financial Markets
+CMTCS;MARGIN TRADING CUSTOMER ;Financial Markets
+CPBCO;Private Banking Customer Def. ;Financial Markets
+CPBPO;Private Banking Portfolio ;Financial Markets
+CRXMO;RXM CONTRACTS ;Financial Markets
+CSHAO;Customer Share Inventory ;Financial Markets
+CSHCO;Share Charges Definition ;Financial Markets
+CSHDS;Share Dealtype Definition ;Financial Markets
+CSHOO;SHARE TRADIN OPTIONS STRUCTURE ;Financial Markets
+CSHRO;Replace Share deals ;Financial Markets
+CSHTO;Share Type Inventory ;Financial Markets
+CSHVO;SHARE TRADING DIVIDENDS ;Financial Markets
+CSSHO;Security Share Portfolio ;Financial Markets
+IFXCL;FX CONTRACT LOG FILE ;Financial markets
+IICSO;interim conf. status file ;Financial Markets
+IIFFO;Interim file Financial Futures ;Financial Markets
+IIFRO;Intermi file FRA ;Financial Markets
+IIFXO;Interim file Foreign exchange ;Financial Markets
+IIOPO;Interim file for Options ;Financial Markets
+IIPIO;Interim file payment instr. ;Financial Markets
+IIRSO;Interim file IRS contracts ;Financial Markets
+IRSPL;IRS payment status log file ;Financial Markets
+IDPLO;DAILY P / L ;general ledger
+CEXPS;Commercial Explication Invent. ;Lending
+CFATO;Facil. booking entries ;Lending
+CFCRO;Facility Comm. Date/Amount ;Lending
+CGURL;Guarantee reduction sched. LOG ;Lending
+CHFCO;History of Fee Calcul. Basis ;Lending
+CREPL;Warranties & Representations ;Lending
+CROCL;RAROC INFORMATION ;lending
+ITLDO;Trailer loan/deposits contract ;lending
+ITITO;Titrisation ;Lending | Financial Markets
+LEBAO;EBA Clearers ;Party Management
+DFSIL;FI Auto Sett Instructions ;Payment Execution Engine
+DGCAL;code group booking ;Payment Execution Engine
+DRPTO;Reporting structure XBR ;Payment Execution Engine
+LBIRO;BIREL Directory ;Payment Execution Engine
