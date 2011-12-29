@@ -15,10 +15,10 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class CheckReferences extends StreamTokenizer{
-	
-	private static final String DBFILE = "D:/workspace/IFS/src/ifs/resources/db.csv";
-	private static final String PROGFILE = "D:/workspace/IFS/src/ifs/resources/progs.csv";
-	private static final String OUTPUTFILE = "D:/workspace/IFS/src/ifs/resources/output.txt";
+
+	private static final String DBFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/db.csv";
+	private static final String PROGFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/progs.csv";
+	private static final String OUTPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/output.txt";
 	
 	private ArrayList<String> databases;
 	private ArrayList<String> programs;

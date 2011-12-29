@@ -18,12 +18,13 @@ import java.util.Map.Entry;
 
 /**
  * @author TDEWEERD
- *
+ * D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/db.csv
  */
+
 public class Mapper {
-	private static final String FS_DATABASE_CSV = "D:/workspace/IFS/src/ifs/resources/ifs_database.csv";
-	private static final String OUTPUTFILE = "D:/workspace/IFS/src/ifs/resources/table_owner_program.csv";
-	private static final String INPUTFILE = "D:/workspace/IFS/src/ifs/resources/output.txt";
+	private static final String FS_DATABASE_CSV = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/fs_database.csv";
+	private static final String OUTPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/able_owner_program.csv";
+	private static final String INPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/output.txt";
 	private static final String CODEFILE = "C:/tempSource/ifsprd.mdl";
 	
 	/**
