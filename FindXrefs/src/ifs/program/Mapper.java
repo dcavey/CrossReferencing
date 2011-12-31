@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -22,8 +23,8 @@ import java.util.Map.Entry;
  */
 
 public class Mapper {
-	private static final String FS_DATABASE_CSV = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/fs_database.csv";
-	private static final String OUTPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/able_owner_program.csv";
+	private static final String FS_DATABASE_CSV = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/ifs_database.csv";
+	private static final String OUTPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/table_owner_program.csv";
 	private static final String INPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/output.txt";
 	private static final String CODEFILE = "C:/tempSource/ifsprd.mdl";
 	
@@ -31,6 +32,8 @@ public class Mapper {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		System.out.printf ("Time at start = %s", new Date() );
 		try {
 			CheckReferences cr = new CheckReferences(new FileInputStream(CODEFILE));
 			cr.run();
@@ -41,6 +44,8 @@ public class Mapper {
 		TablesEngine.getTablesCollection(new File(FS_DATABASE_CSV));
 		HashMap<String, ArrayList<String>> h = ProgramTablesEngine.generateTableToProgramsMapping(new File(INPUTFILE));
 		printOutput(h);
+		
+		System.out.printf ("Time at end = %s", new Date() );
 	}
 	
 	public static void printOutput(HashMap<String, ArrayList<String>> references) {

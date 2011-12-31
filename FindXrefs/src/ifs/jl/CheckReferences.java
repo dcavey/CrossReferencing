@@ -99,7 +99,7 @@ public class CheckReferences extends StreamTokenizer{
 					
 		if (rest && !match)
 		{
-			System.out.printf ("UNDO_SKIPPING_FOR:  %s \n" , line);
+			// System.out.printf ("UNDO_SKIPPING_FOR:  %s \n" , line);
 			match = true;   			// do not skip for now ... See what we are loosing !!!
 		}
 		
