@@ -6,6 +6,7 @@ package ifs.program;
 import ifs.engine.ProgramTablesEngine;
 import ifs.engine.TablesEngine;
 import ifs.jl.CheckReferences;
+import ifs.resources.LocateResource;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,20 +20,19 @@ import java.util.Map.Entry;
 
 /**
  * @author TDEWEERD
- * D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/db.csv
+ * db.csv
  */
 
 public class Mapper {
-	private static final String FS_DATABASE_CSV = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/ifs_database.csv";
-	private static final String OUTPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/table_owner_program.csv";
-	private static final String INPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/output.txt";
+	private static final String FS_DATABASE_CSV = "ifs_database.csv";
+	private static final String OUTPUTFILE = "table_owner_program.csv";
+	private static final String INPUTFILE = "output.txt";
 	private static final String CODEFILE = "C:/tempSource/ifsprd.mdl";
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 		System.out.printf ("Time at start = %s", new Date() );
 		try {
 			CheckReferences cr = new CheckReferences(new FileInputStream(CODEFILE));
@@ -41,8 +41,8 @@ public class Mapper {
 			System.err.println("Exception :" + e);
 		}
 		
-		TablesEngine.getTablesCollection(new File(FS_DATABASE_CSV));
-		HashMap<String, ArrayList<String>> h = ProgramTablesEngine.generateTableToProgramsMapping(new File(INPUTFILE));
+		TablesEngine.getTablesCollection(new File(LocateResource.getResource(FS_DATABASE_CSV)));
+		HashMap<String, ArrayList<String>> h = ProgramTablesEngine.generateTableToProgramsMapping(new File(LocateResource.getResource(INPUTFILE)));
 		printOutput(h);
 		
 		System.out.printf ("Time at end = %s", new Date() );
@@ -52,7 +52,7 @@ public class Mapper {
 
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter(OUTPUTFILE);
+			FileWriter fstream = new FileWriter(LocateResource.getResource(OUTPUTFILE));
 			BufferedWriter out = new BufferedWriter(fstream);
 			Iterator<Entry<String, ArrayList<String>>> it = references.entrySet()
 					.iterator();

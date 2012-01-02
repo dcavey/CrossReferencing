@@ -1,7 +1,8 @@
 /**
  * 
  */
-package resources;
+package ifs.resources;
+
 
 /**
  * @author TDEWEERD
@@ -15,6 +16,6 @@ public class LocateResource {
 	 * @return path + filename
 	 */
 	public static String getResource(String filename) {
-		return ClassLoader.getSystemClassLoader().getResource(filename).toString();
+		return LocateResource.class.getResource(filename).toString();
 	}
 }
