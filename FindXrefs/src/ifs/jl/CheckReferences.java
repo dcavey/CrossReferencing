@@ -1,5 +1,7 @@
 package ifs.jl;
 
+import ifs.resources.LocateResource;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -16,9 +18,9 @@ import java.util.Map.Entry;
 
 public class CheckReferences extends StreamTokenizer{
 
-	private static final String DBFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/db.csv";
-	private static final String PROGFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/progs.csv";
-	private static final String OUTPUTFILE = "D:/dvandeca/Documents/My LabsWork/GitRepositories/CrossReferencing/CrossReferencing/FindXrefs/src/ifs/resources/output.txt";
+	private static final String DBFILE = "db.csv";
+	private static final String PROGFILE = "progs.csv";
+	private static final String OUTPUTFILE = "output.txt";
 	
 	private ArrayList<String> databases;
 	private ArrayList<String> programs;
@@ -110,7 +112,7 @@ public class CheckReferences extends StreamTokenizer{
 		ArrayList<String> outputList = new ArrayList<String>();
 		try {
 			// Open the file
-			FileInputStream fstream = new FileInputStream(DBFILE);
+			FileInputStream fstream = new FileInputStream(LocateResource.getResource(DBFILE));
 			// Get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -132,7 +134,7 @@ public class CheckReferences extends StreamTokenizer{
 		ArrayList<String> outputList = new ArrayList<String>();
 		try {
 			// Open the file
-			FileInputStream fstream = new FileInputStream(PROGFILE);
+			FileInputStream fstream = new FileInputStream(LocateResource.getResource(PROGFILE));
 			// Get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -154,7 +156,7 @@ public class CheckReferences extends StreamTokenizer{
 
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter(OUTPUTFILE);
+			FileWriter fstream = new FileWriter(LocateResource.getResource(OUTPUTFILE));
 			BufferedWriter out = new BufferedWriter(fstream);
 			Iterator<Entry<String, ArrayList<String>>> it = references.entrySet()
 					.iterator();
