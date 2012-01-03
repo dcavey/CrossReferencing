@@ -38,7 +38,7 @@ public class Mapper {
 			CheckReferences cr = new CheckReferences(new FileInputStream(CODEFILE));
 			cr.run();
 		} catch (Exception e) {
-			System.err.println("Exception :" + e);
+			e.printStackTrace();
 		}
 		
 		TablesEngine.getTablesCollection(new File(LocateResource.getResource(FS_DATABASE_CSV)));

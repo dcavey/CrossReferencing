@@ -5,7 +5,9 @@ import ifs.resources.LocateResource;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +26,7 @@ public class CheckReferences extends StreamTokenizer{
 	
 	private ArrayList<String> databases;
 	private ArrayList<String> programs;
+	private ArrayList<Integer> unmatchedLines = new ArrayList<Integer>();
 	
 	public CheckReferences(InputStream in){
 		super(in);
@@ -59,7 +62,7 @@ public class CheckReferences extends StreamTokenizer{
 					lineNr = lineno();
 				} else {
 					int i = 0;
-					while(i < databases.size() && !match(i, builder)){
+					while(i < databases.size() && !match(i, builder, lineno())){
 						i++;
 					}
 					if(i != databases.size()){
@@ -73,7 +76,7 @@ public class CheckReferences extends StreamTokenizer{
 		printOutput(references);
 	}
 
-	private boolean match(int i, StringBuilder builder) {
+	private boolean match(int i, StringBuilder builder, int lineNr) {
 		String line = builder.toString();
 		
 		boolean match = false;
@@ -101,8 +104,8 @@ public class CheckReferences extends StreamTokenizer{
 					
 		if (rest && !match)
 		{
-			// System.out.printf ("UNDO_SKIPPING_FOR:  %s \n" , line);
-			match = true;   			// do not skip for now ... See what we are loosing !!!
+			unmatchedLines.add(lineNr);
+			System.out.println(lineNr);
 		}
 		
 		return match;
@@ -153,7 +156,7 @@ public class CheckReferences extends StreamTokenizer{
 	}
 	
 	public void printOutput(HashMap<String, ArrayList<String>> references) {
-
+		//print output
 		try {
 			// Create file
 			FileWriter fstream = new FileWriter(LocateResource.getResource(OUTPUTFILE));
@@ -174,6 +177,51 @@ public class CheckReferences extends StreamTokenizer{
 			// Close the output stream
 			out.close();
 		} catch (Exception e) {
+			System.err.println("Error: " + e.getMessage());
+		}
+		
+		//print skipped lines
+		try {
+			// Open the file
+			FileInputStream fstream = new FileInputStream("C:/tempSource/ifsprd.mdl");
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine = br.readLine();
+			int linenr = 0;
+			int lnr = 0;
+			Iterator<Integer> iterator = unmatchedLines.iterator();
+			//
+			File newFile = new File("FindXrefs/src/ifs/resources/skippedlines.txt");
+			newFile.createNewFile();
+			FileWriter filestream = new FileWriter(newFile);
+			BufferedWriter out = new BufferedWriter(filestream);
+			// Read File Line By Line
+			boolean proceedIterator = true;
+			while ((strLine = br.readLine()) != null) {
+				
+				
+				if (iterator.hasNext() && proceedIterator) {
+					Integer integer = iterator.next();
+					lnr = integer.intValue();
+					while (lnr == linenr-1) {
+						integer = iterator.next();
+						lnr = integer.intValue();
+					}
+					proceedIterator = false;
+				}
+				
+				if (lnr == linenr) {
+						out.write(strLine);
+						out.newLine();
+						proceedIterator = true;
+				}
+				linenr++;
+			}
+			// Close the input stream
+			in.close();
+			out.close();
+		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
