@@ -68,7 +68,7 @@ public class BasicProgram implements Program {
 	@Override
 	public String getCrudOperation(char c) {
 		if (crud.contains(""+c)) {
-			return "x";
+			return ""+c;
 		}
 		return "";
 	}

@@ -87,7 +87,7 @@ public class BasicTable implements Table{
 	@Override
 	public String getCrudOperation(char c) {
 		if (crud.contains(""+c)) {
-			return "x";
+			return ""+c;
 		}
 		return "";
 	}

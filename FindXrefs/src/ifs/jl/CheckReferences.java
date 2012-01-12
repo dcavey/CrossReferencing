@@ -97,7 +97,7 @@ public class CheckReferences extends StreamTokenizer{
 		boolean match = false;
 		
 		if (sval.matches("P" + databases.get(i) + "[a-zA-Z0-9]+")) {
-			if( ( line.matches(".*DT.*")) || (line.matches(".*DETERMINE.*"))) {
+			if( ( line.matches(".*DT.*")) || (line.matches(".*DETERMINE.*")) || (line.matches(".*LU.*"))) {
 				match = true;
 				crudOperation = Table.DETERMINE;
 			}
@@ -113,6 +113,9 @@ public class CheckReferences extends StreamTokenizer{
 			} else if( line.matches(".*PURGE.*") || line.matches(".*PU.*")) { 
 				match = true;
 				crudOperation = Table.PURGE;
+			} else if( ( line.matches(".*DT.*")) || (line.matches(".*DETERMINE.*")) || (line.matches(".*LU.*"))) {
+				match = true;
+				crudOperation = Table.DETERMINE;
 			} else
 				unmatchedLines.add(lineNr);
 		}
