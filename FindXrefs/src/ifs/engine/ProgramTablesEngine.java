@@ -3,13 +3,20 @@
  */
 package ifs.engine;
 
+import ifs.datamodel.BasicProgram;
+import ifs.datamodel.BasicTable;
+import ifs.datamodel.Program;
+import ifs.datamodel.Table;
+import ifs.resources.LocateResource;
+
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author TDEWEERD
@@ -17,9 +24,15 @@ import java.util.HashMap;
  */
 public class ProgramTablesEngine {
 
+	private static final String OUTPUTFILE = "table_owner_program.csv";
 	
-	public static HashMap<String, ArrayList<String>> generateTableToProgramsMapping(File file) {
-		HashMap<String, ArrayList<String>> tables = new HashMap<String, ArrayList<String>>();
+	public static void generateTableToProgramsMapping(File file) throws IOException {
+		//HashMap<Table, ArrayList<Program>> tables = new HashMap<Table, ArrayList<Program>>();
+		
+		FileWriter fstream = new FileWriter(LocateResource.getResource(OUTPUTFILE));
+		BufferedWriter out = new BufferedWriter(fstream);
+		out.write("Table;C;R;U;D;Owner;Program");
+		out.newLine();
 		
 		BufferedReader bufRdr = null;
 		try {
@@ -28,7 +41,7 @@ public class ProgramTablesEngine {
 			e.printStackTrace();
 		}
 		String line = null;
-		String program = null;
+		Program program = null;
 		
 		boolean readingProgram = true;
 		
@@ -36,22 +49,38 @@ public class ProgramTablesEngine {
 		try {
 			while((line = bufRdr.readLine()) != null)
 			{
+				String[] split = line.split(",");
 				if (line.equals("----------------------------")) {
 					readingProgram = true;
 					continue;
 				}
 				if (readingProgram) {
-					program = line;
+					program = new BasicProgram(line,"");
 					readingProgram = false;
 				} else {
-					ArrayList<String> programs = null;
-					if(tables.containsKey(line)) {
-						programs = tables.get(line);
-					} else {
-						programs = new ArrayList<String>();
-					}
-					programs.add(program);
-					tables.put(line, programs);
+					Table table = new BasicTable(split[0], split[1]);
+					
+					if (!TablesEngine.tableAndOwner.containsKey(table.getTableName()))
+						continue;
+					//table
+					out.write(table.getTableName());
+					out.write(';');
+					//tablecrudoperation
+					out.write(table.getCrudOperation('C'));
+					out.write(';');
+					out.write(table.getCrudOperation('R'));
+					out.write(';');
+					out.write(table.getCrudOperation('U'));
+					out.write(';');
+					out.write(table.getCrudOperation('D'));
+					out.write(';');
+					//owner
+					out.write(TablesEngine.tableAndOwner.get(table.getTableName()));
+					out.write(';');					
+					//program
+					out.write(program.getProgramName());
+					out.write(';');
+					out.newLine();
 				}
 			}
 		} catch (IOException e) {
@@ -65,7 +94,6 @@ public class ProgramTablesEngine {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return tables;
+		out.close();
 	}
 }

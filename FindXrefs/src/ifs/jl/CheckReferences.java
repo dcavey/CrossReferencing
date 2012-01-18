@@ -1,10 +1,14 @@
 package ifs.jl;
 
+import ifs.datamodel.BasicTable;
+import ifs.datamodel.Table;
+import ifs.program.Constants;
 import ifs.resources.LocateResource;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,12 +22,14 @@ import java.util.Map.Entry;
 
 public class CheckReferences extends StreamTokenizer{
 
+	private static final String SKIPPEDLINES = "FindXrefs/src/ifs/resources/skippedlines.txt";
 	private static final String DBFILE = "db.csv";
 	private static final String PROGFILE = "progs.csv";
 	private static final String OUTPUTFILE = "output.txt";
 	
 	private ArrayList<String> databases;
 	private ArrayList<String> programs;
+	private ArrayList<Integer> unmatchedLines = new ArrayList<Integer>();
 	
 	public CheckReferences(InputStream in){
 		super(in);
@@ -35,8 +41,8 @@ public class CheckReferences extends StreamTokenizer{
 		eolIsSignificant(true);
 		int lineNr = -1;
 		String currentProg = "";
-		HashMap<String,ArrayList<String>> references = new HashMap<String,ArrayList<String>>();
-		ArrayList<String> dbs = new ArrayList<String>();
+		HashMap<String,ArrayList<Table>> references = new HashMap<String,ArrayList<Table>>();
+		ArrayList<Table> dbs = new ArrayList<Table>();
 		StringBuilder builder = new StringBuilder();
 		while(nextToken() != StreamTokenizer.TT_EOF){
 			if (ttype == StreamTokenizer.TT_EOL) {
@@ -50,7 +56,7 @@ public class CheckReferences extends StreamTokenizer{
 						references.put(currentProg, dbs);
 					}
 					if(!references.containsKey(sval)){
-						dbs = new ArrayList<String>();
+						dbs = new ArrayList<Table>();
 						dbs.clear();
 						currentProg = sval;
 					} else {
@@ -59,50 +65,59 @@ public class CheckReferences extends StreamTokenizer{
 					lineNr = lineno();
 				} else {
 					int i = 0;
-					while(i < databases.size() && !match(i, builder)){
+					while(i < databases.size() && !match(i, builder, lineno())){
 						i++;
 					}
 					if(i != databases.size()){
-						if(!dbs.contains(databases.get(i))){
-							dbs.add(databases.get(i));
+						Table table = new BasicTable(databases.get(i),crudOperation);
+						if(!dbs.contains(table)){
+							dbs.add(table);
+						} else {
+							Iterator<Table> iterator = dbs.iterator();
+							while (iterator.hasNext()) {
+								Table next = iterator.next();
+								if (next.equals(table)) {
+									next.pushCrudOperation(crudOperation);
+								}
+							}
 						}
 					}
 				}
 			}
 			}
 		printOutput(references);
+//		printSkippedLines();
 	}
 
-	private boolean match(int i, StringBuilder builder) {
+	private String crudOperation = "";
+	
+	private boolean match(int i, StringBuilder builder, int lineNr) {
 		String line = builder.toString();
 		
 		boolean match = false;
 		
-		boolean dt = sval.matches("P" + databases.get(i) + "[a-zA-Z0-9]+");   // was "[0-9]+"
-		boolean flag = sval.matches(databases.get(i) + "\\.+.+");
-		boolean rest = sval.matches(databases.get(i));
-		
-		if (dt) {
-			if( ( line.matches(".*DT.*")) || (line.matches(".*DETERMINE.*")) ) 
+		if (sval.matches("P" + databases.get(i) + "[a-zA-Z0-9]+")) {
+			if( ( line.matches(".*DT.*")) || (line.matches(".*DETERMINE.*")) || (line.matches(".*LU.*"))) {
 				match = true;
-		} else if (flag) {
-			if( (line.matches(".*FL.*")) || (line.matches (".*FLAG.*") )     )
+				crudOperation = Table.DETERMINE;
+			}
+		} else if (sval.matches(databases.get(i) + "\\.+.+")) {
+			if( (line.matches(".*FL.*")) || (line.matches (".*FLAG.*") )) {
 				match = true;
-		} else if (rest) {
-			if(line.matches(".*AUTO\\.ENTRY.*") || line.matches(".*AE.*"))
+				crudOperation = Table.FLAG;
+			}
+		} else if (sval.matches(databases.get(i))) {
+			if(line.matches(".*AUTO\\.ENTRY.*") || line.matches(".*AE.*")) {
 				match = true;
-			else if( line.matches(".*PURGE.*") || line.matches(".*PU.*")) 
+				crudOperation = Table.AUTO_ENTRY;
+			} else if( line.matches(".*PURGE.*") || line.matches(".*PU.*")) { 
 				match = true;
-		}
-
-		if (match) {
-			// System.out.printf ("SELECTING:  %s \n" , line);
-		}
-					
-		if (rest && !match)
-		{
-			// System.out.printf ("UNDO_SKIPPING_FOR:  %s \n" , line);
-			match = true;   			// do not skip for now ... See what we are loosing !!!
+				crudOperation = Table.PURGE;
+			} else if( ( line.matches(".*DT.*")) || (line.matches(".*DETERMINE.*")) || (line.matches(".*LU.*"))) {
+				match = true;
+				crudOperation = Table.DETERMINE;
+			} else
+				unmatchedLines.add(lineNr);
 		}
 		
 		return match;
@@ -152,20 +167,19 @@ public class CheckReferences extends StreamTokenizer{
 		return outputList;
 	}
 	
-	public void printOutput(HashMap<String, ArrayList<String>> references) {
-
+	public void printOutput(HashMap<String,ArrayList<Table>> references) {
+		//print output
 		try {
 			// Create file
 			FileWriter fstream = new FileWriter(LocateResource.getResource(OUTPUTFILE));
 			BufferedWriter out = new BufferedWriter(fstream);
-			Iterator<Entry<String, ArrayList<String>>> it = references.entrySet()
-					.iterator();
+			Iterator<Entry<String, ArrayList<Table>>> it = references.entrySet().iterator();
 			while (it.hasNext()) {
-				Entry<String, ArrayList<String>> e = it.next();
+				Entry<String, ArrayList<Table>> e = it.next();
 				out.write(e.getKey());
 				out.newLine();
-				for(String s : e.getValue()){
-					out.write(s);
+				for(Table s : e.getValue()){
+					out.write(s.getTableName() + "," + s.getCrudOperation());
 					out.newLine();
 				}
 				out.write("----------------------------");
@@ -174,6 +188,57 @@ public class CheckReferences extends StreamTokenizer{
 			// Close the output stream
 			out.close();
 		} catch (Exception e) {
+			System.err.println("Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Function prints all lines that where not included in the output. These lines are used to validate if no usefull info
+	 * was emitted from the output.
+	 */
+	private void printSkippedLines() {
+		//print skipped lines
+		try {
+			// Open the file
+			FileInputStream fstream = new FileInputStream(Constants.SOURCE_CODE);
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine = br.readLine();
+			int linenr = 0;
+			int lnr = 0;
+			Iterator<Integer> iterator = unmatchedLines.iterator();
+			//
+			File newFile = new File(SKIPPEDLINES);
+			newFile.createNewFile();
+			FileWriter filestream = new FileWriter(newFile);
+			BufferedWriter out = new BufferedWriter(filestream);
+			// Read File Line By Line
+			boolean proceedIterator = true;
+			while ((strLine = br.readLine()) != null) {
+				
+				
+				if (iterator.hasNext() && proceedIterator) {
+					Integer integer = iterator.next();
+					lnr = integer.intValue();
+					while (lnr == linenr-1) {
+						integer = iterator.next();
+						lnr = integer.intValue();
+					}
+					proceedIterator = false;
+				}
+				
+				if (lnr == linenr) {
+						out.write(strLine);
+						out.newLine();
+						proceedIterator = true;
+				}
+				linenr++;
+			}
+			// Close the input stream
+			in.close();
+			out.close();
+		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
