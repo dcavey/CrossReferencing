@@ -7,12 +7,11 @@ import ifs.datamodel.Program;
 import ifs.datamodel.Table;
 import ifs.engine.ProgramTablesEngine;
 import ifs.engine.TablesEngine;
-import ifs.jl.CheckReferences;
+import ifs.jl.CheckRefs;
 import ifs.resources.LocateResource;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -40,7 +39,8 @@ public class Mapper {
 		System.out.printf ("Time at start = %s", new Date() );
 		//print to output.txt -prog / db-
 		try {
-			CheckReferences cr = new CheckReferences(new FileInputStream(Constants.SOURCE_CODE));
+			//CheckReferences cr = new CheckReferences(new FileInputStream(Constants.SOURCE_CODE));
+			CheckRefs cr = new CheckRefs();
 			cr.run();
 		} catch (Exception e) {
 			e.printStackTrace();

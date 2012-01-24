@@ -122,7 +122,7 @@ public class CheckReferences extends StreamTokenizer{
 		
 		return match;
 	}
-	
+
 	private ArrayList<String> readDbs() {
 		ArrayList<String> outputList = new ArrayList<String>();
 		try {
