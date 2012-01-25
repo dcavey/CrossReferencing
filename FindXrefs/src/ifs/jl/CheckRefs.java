@@ -68,12 +68,14 @@ public class CheckRefs {
 	
 	private void saveTable(String[] text, String crud) {
 		ArrayList<String> tables = findDBTables(text);
-		if(crud.equals(Table.FLAG) && tables.size()==2){
+		if(crud.equals(Table.FLAG) && tables.size()>1){
 			pushInReferences(text[0].substring(2), tables.get(0), Table.DETERMINE);
 			pushInReferences(text[0].substring(2), tables.get(1), crud);
 		} else if(tables.size() > 1) {
 			if( crud.equals(Table.DETERMINE)){
-				pushInReferences(text[0].substring(2), tables.get(0), crud);
+				for(int i=0; i < tables.size(); i++){
+					pushInReferences(text[0].substring(2), tables.get(i), crud);
+				}
 			} else {
 				System.err.println("MULTIPLE TABLES ON ONE LINE");
 			}
@@ -103,19 +105,25 @@ public class CheckRefs {
 
 	private ArrayList<String> findDBTables(String[] text){
 		ArrayList<String> dbs = new ArrayList<String>();
-		int i = 0;
+		int i = 1;
 		int j = -1;
 		boolean found = false;
 		while(!found && i<text.length){
+			if(text[i].equals(":")){
+				break;
+			}
 			if(databases.contains(text[i].trim())){
-				dbs.add(text[i].trim());
+				if(!dbs.contains(text[i].trim())){
+					dbs.add(text[i].trim());
+				}
 				found = true;
 				j = -1;
 			} else {
 				j = 0;
 				while(j < databases.size() && 
-						!(text[i].trim().matches(".*" + databases.get(j) + "\\.+.+")  					//For FLAG
-								|| text[i].trim().matches("P" + databases.get(j) + "[a-zA-Z0-9]+")		//For DETERMINE
+						!(text[i].trim().matches(".*" + databases.get(j) + "\\.+.+")  						//For FLAG
+								|| text[i].trim().matches("P" + databases.get(j) + "[a-zA-Z0-9]+.*")		//For DT
+								|| text[i].trim().matches(".*(" + databases.get(j) + ").*"	)				//For LU
 								)){
 					j++;
 				}
@@ -125,7 +133,9 @@ public class CheckRefs {
 				i++;
 			}
 			if(found && j!=-1){
-				dbs.add(databases.get(j));
+				if(!dbs.contains(databases.get(j))){
+					dbs.add(databases.get(j));
+				}
 				found = false;
 			}
 		}
