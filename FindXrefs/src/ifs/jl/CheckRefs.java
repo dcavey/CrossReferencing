@@ -46,6 +46,9 @@ public class CheckRefs {
 			// Read File Line By Line
 			while ((strLine = br.readLine()) != null) {
 				lineNr++;
+				if(lineNr == 883426){
+					System.out.print("STOP");
+				}
 				String[] text = strLine.replaceAll("  +", " ").split(" ");
 				if(strLine.matches(".*DT;.*") || strLine.matches(".*DETERMINE.*") || strLine.matches(".*LU;.*")){
 					saveTable(text, Table.DETERMINE);
@@ -67,7 +70,7 @@ public class CheckRefs {
 	}
 	
 	private void saveTable(String[] text, String crud) {
-		ArrayList<String> tables = findDBTables(text);
+		ArrayList<String> tables = findDBTables(text, crud);
 		if(crud.equals(Table.FLAG) && tables.size()>1){
 			pushInReferences(text[0].substring(2), tables.get(0), Table.DETERMINE);
 			pushInReferences(text[0].substring(2), tables.get(1), crud);
@@ -103,7 +106,7 @@ public class CheckRefs {
 		}
 	}
 
-	private ArrayList<String> findDBTables(String[] text){
+	private ArrayList<String> findDBTables(String[] text, String crud){
 		ArrayList<String> dbs = new ArrayList<String>();
 		int i = 1;
 		int j = -1;
@@ -120,15 +123,19 @@ public class CheckRefs {
 				j = -1;
 			} else {
 				j = 0;
-				while(j < databases.size() && 
-						!(text[i].trim().matches(".*" + databases.get(j) + "\\.+.+")  						//For FLAG
-								|| text[i].trim().matches("P" + databases.get(j) + "[a-zA-Z0-9]+.*")		//For DT
-								|| text[i].trim().matches(".*(" + databases.get(j) + ").*"	)				//For LU
-								)){
-					j++;
-				}
-				if(j < databases.size()){
-					found = true;
+				while(!found && j < databases.size()){
+					if(text[i].trim().matches(databases.get(j) + "\\.+.+") && crud.equals(Table.FLAG)){
+						//For FLAG
+						found = true;
+					} else if(text[i].trim().matches("P" + databases.get(j) + "[a-zA-Z0-9]+.*") && crud.equals(Table.DETERMINE)){
+						//For DT
+						found = true;
+					} else if(text[i].trim().matches(".*(" + databases.get(j) + ").*") && crud.equals(Table.DETERMINE)){
+						//For LU
+						found = true;
+					} else {
+						j++;
+					}
 				}
 				i++;
 			}
