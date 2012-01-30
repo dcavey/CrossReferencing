@@ -8,7 +8,6 @@ import ifs.datamodel.BasicTable;
 import ifs.datamodel.Program;
 import ifs.datamodel.Table;
 import ifs.program.Constants;
-import ifs.resources.LocateResource;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * @author TDEWEERD

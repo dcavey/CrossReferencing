@@ -8,7 +8,6 @@ import ifs.datamodel.Table;
 import ifs.engine.ProgramTablesEngine;
 import ifs.engine.TablesEngine;
 import ifs.jl.CheckRefs;
-import ifs.resources.LocateResource;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -61,7 +60,7 @@ public class Mapper {
 			FileWriter fstream = new FileWriter(new File(Constants.CSVOUTPUTFILE));
 			BufferedWriter out = new BufferedWriter(fstream);
 			Iterator<Entry<Table, ArrayList<Program>>> it = h.entrySet().iterator();
-			out.write("Table;C;R;U;D;Owner;Program");
+			out.write("Table;C;R;U;D;Program;Owner");
 			out.newLine();
 			while (it.hasNext()) {
 				Entry<Table, ArrayList<Program>> e = it.next();
@@ -80,12 +79,12 @@ public class Mapper {
 					out.write(s.getCrudOperation('U'));
 					out.write(';');
 					out.write(s.getCrudOperation('D'));
+					out.write(';');				
+					//program
+					out.write(s.getProgramName());
 					out.write(';');
 					//owner
 					out.write(TablesEngine.tableAndOwner.get(e.getKey().getTableName()));
-					out.write(';');					
-					//program
-					out.write(s.getProgramName());
 					out.write(';');
 					out.newLine();
 				}
