@@ -62,7 +62,7 @@ public class Mapper {
 
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter(LocateResource.getResource(OUTPUTFILE));
+			FileWriter fstream = new FileWriter(new File(LocateResource.getResource(OUTPUTFILE)));
 			BufferedWriter out = new BufferedWriter(fstream);
 			Iterator<Entry<Table, ArrayList<Program>>> it = h.entrySet().iterator();
 			out.write("Table;C;R;U;D;Owner;Program");
