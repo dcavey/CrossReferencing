@@ -3,7 +3,6 @@ package ifs.jl;
 import ifs.datamodel.BasicTable;
 import ifs.datamodel.Table;
 import ifs.program.Constants;
-import ifs.resources.LocateResource;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,10 +17,6 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class CheckRefs {
-	private static final String SKIPPEDLINES = "skippedlines.txt";
-	private static final String DBFILE = "db.csv";
-	private static final String PROGFILE = "progs.csv";
-	private static final String OUTPUTFILE = "output.txt";
 
 	private ArrayList<String> databases;
 	private ArrayList<String> programs;
@@ -153,8 +148,7 @@ public class CheckRefs {
 		ArrayList<String> outputList = new ArrayList<String>();
 		try {
 			// Open the file
-			FileInputStream fstream = new FileInputStream(
-					LocateResource.getResource(DBFILE));
+			FileInputStream fstream = new FileInputStream(Constants.TABLEFILE);
 			// Get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -162,7 +156,7 @@ public class CheckRefs {
 			// Read File Line By Line
 			while ((strLine = br.readLine()) != null) {
 				String[] output = strLine.split(";");
-				outputList.add(output[1]);
+				outputList.add(output[0]);
 			}
 			// Close the input stream
 			in.close();
@@ -176,8 +170,7 @@ public class CheckRefs {
 		ArrayList<String> outputList = new ArrayList<String>();
 		try {
 			// Open the file
-			FileInputStream fstream = new FileInputStream(
-					LocateResource.getResource(PROGFILE));
+			FileInputStream fstream = new FileInputStream(Constants.PROGFILE);
 			// Get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -208,7 +201,7 @@ public class CheckRefs {
 		//print output
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter(LocateResource.getResource(OUTPUTFILE));
+			FileWriter fstream = new FileWriter(Constants.TEXTOUTPUTFILE);
 			BufferedWriter out = new BufferedWriter(fstream);
 			Iterator<Entry<String, ArrayList<Table>>> it = references.entrySet().iterator();
 			while (it.hasNext()) {
@@ -246,7 +239,7 @@ public class CheckRefs {
 			int lnr = 0;
 			Iterator<Integer> iterator = unmatchedLines.iterator();
 			//
-			File newFile = new File(LocateResource.getResource(SKIPPEDLINES));
+			File newFile = new File(Constants.SKIPPEDLINES);
 			newFile.createNewFile();
 			FileWriter filestream = new FileWriter(newFile);
 			BufferedWriter out = new BufferedWriter(filestream);

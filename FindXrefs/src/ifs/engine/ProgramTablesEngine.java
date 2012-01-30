@@ -7,6 +7,7 @@ import ifs.datamodel.BasicProgram;
 import ifs.datamodel.BasicTable;
 import ifs.datamodel.Program;
 import ifs.datamodel.Table;
+import ifs.program.Constants;
 import ifs.resources.LocateResource;
 
 import java.io.BufferedReader;
@@ -24,12 +25,10 @@ import java.util.ArrayList;
  */
 public class ProgramTablesEngine {
 
-	private static final String OUTPUTFILE = "table_owner_program.csv";
-	
 	public static void generateTableToProgramsMapping(File file) throws IOException {
 		//HashMap<Table, ArrayList<Program>> tables = new HashMap<Table, ArrayList<Program>>();
 		
-		FileWriter fstream = new FileWriter(LocateResource.getResource(OUTPUTFILE));
+		FileWriter fstream = new FileWriter(Constants.CSVOUTPUTFILE);
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write("Table;C;R;U;D;Owner;Program");
 		out.newLine();

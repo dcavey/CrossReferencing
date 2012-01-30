@@ -33,11 +33,10 @@ public class TablesEngine {
 			bufRdr = new BufferedReader(new FileReader(file));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
-		String line = null;
-		 
+		} 
 		//read each line of text file
 		try {
+			String line = bufRdr.readLine();
 			while((line = bufRdr.readLine()) != null)
 			{
 				StringTokenizer st = new StringTokenizer(line,";");

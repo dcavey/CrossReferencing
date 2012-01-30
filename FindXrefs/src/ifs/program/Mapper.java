@@ -27,10 +27,6 @@ import java.util.Map.Entry;
  */
 
 public class Mapper {
-	private static final String FS_DATABASE_CSV = "ifs_database.csv";
-	private static final String OUTPUTFILE = "table_owner_program.csv";
-	private static final String INPUTFILE = "output.txt";
-	
 	/**
 	 * @param args
 	 * @throws IOException 
@@ -47,9 +43,9 @@ public class Mapper {
 		}
 		
 		try {
-			TablesEngine.getTablesCollection(new File(LocateResource.getResource(FS_DATABASE_CSV)));
+			TablesEngine.getTablesCollection(new File(Constants.TABLEFILE));
 		
-			ProgramTablesEngine.generateTableToProgramsMapping(new File(LocateResource.getResource(INPUTFILE)));
+			ProgramTablesEngine.generateTableToProgramsMapping(new File(Constants.TEXTOUTPUTFILE));
 			//printOutput(h);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
@@ -62,7 +58,7 @@ public class Mapper {
 
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter(new File(LocateResource.getResource(OUTPUTFILE)));
+			FileWriter fstream = new FileWriter(new File(Constants.CSVOUTPUTFILE));
 			BufferedWriter out = new BufferedWriter(fstream);
 			Iterator<Entry<Table, ArrayList<Program>>> it = h.entrySet().iterator();
 			out.write("Table;C;R;U;D;Owner;Program");
