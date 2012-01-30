@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class CheckRefs {
-	private static final String SKIPPEDLINES = "FindXrefs/src/ifs/resources/skippedlines.txt";
+	private static final String SKIPPEDLINES = "skippedlines.txt";
 	private static final String DBFILE = "db.csv";
 	private static final String PROGFILE = "progs.csv";
 	private static final String OUTPUTFILE = "output.txt";
@@ -246,7 +246,7 @@ public class CheckRefs {
 			int lnr = 0;
 			Iterator<Integer> iterator = unmatchedLines.iterator();
 			//
-			File newFile = new File(SKIPPEDLINES);
+			File newFile = new File(LocateResource.getResource(SKIPPEDLINES));
 			newFile.createNewFile();
 			FileWriter filestream = new FileWriter(newFile);
 			BufferedWriter out = new BufferedWriter(filestream);
