@@ -17,7 +17,8 @@ import java.util.Date;
  * db.csv
  */
 
-public class Mapper {	
+public class Mapper {
+	private static final String ERROR_CLOSE_FILES = "Please close all files!";
 	/**
 	 * @param args
 	 * @throws IOException 
@@ -47,12 +48,29 @@ public class Mapper {
 	}
 	
 	private static void clearFiles(){
-		if(!(new File(Constants.CSVOUTPUTFILE).delete()
-				&& new File(Constants.GPROGOUTPUT).delete()
-				&& new File(Constants.TEXTOUTPUTFILE).delete()
-				&& new File(Constants.SKIPPEDLINES).delete())) {
-			System.err.println("Please close all files!");
-			System.exit(-1);
+		if(new File(Constants.CSVOUTPUTFILE).exists()){
+			if(!(new File(Constants.CSVOUTPUTFILE).delete())) {
+				System.err.println(ERROR_CLOSE_FILES);
+				System.exit(-1);
+			}
+		}
+		if(new File(Constants.GPROGOUTPUT).exists()){
+			if(!(new File(Constants.GPROGOUTPUT).delete())) {
+				System.err.println(ERROR_CLOSE_FILES);
+				System.exit(-1);
+			}
+		}
+		if(new File(Constants.TEXTOUTPUTFILE).exists()){
+			if(!(new File(Constants.TEXTOUTPUTFILE).delete())) {
+				System.err.println(ERROR_CLOSE_FILES);
+				System.exit(-1);
+			}
+		}
+		if(new File(Constants.SKIPPEDLINES).exists()){
+			if(!(new File(Constants.SKIPPEDLINES).delete())) {
+				System.err.println(ERROR_CLOSE_FILES);
+				System.exit(-1);
+			}
 		}
 	}
 }
