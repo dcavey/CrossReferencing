@@ -8,5 +8,6 @@ public class Constants {
 	
 	public static final String SKIPPEDLINES = "C:/WorkStorageIFS/output/tmp_skippedlines.txt";
 	public static final String TEXTOUTPUTFILE = "C:/WorkStorageIFS/output/tmp_output.txt";
-	public static final String CSVOUTPUTFILE = "C:/WorkStorageIFS/output/out_table_owner_program.csv";
+	public static final String CSVOUTPUTFILE = "C:/WorkStorageIFS/output/out_table_program_owner.csv";
+	public static final String GPROGOUTPUT = "C:/WorkStorageIFS/output/out_program_globallogic.csv";
 }

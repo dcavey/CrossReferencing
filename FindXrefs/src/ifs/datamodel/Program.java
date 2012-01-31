@@ -11,7 +11,7 @@ public interface Program {
 
 	public String getProgramName();
 	
-	public String getProgramDecription();
+	public String getProgramType();
 	
 	public String getCrudOperation();
 

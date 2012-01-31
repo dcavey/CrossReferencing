@@ -3,37 +3,30 @@
  */
 package ifs.program;
 
-import ifs.datamodel.Program;
-import ifs.datamodel.Table;
 import ifs.engine.ProgramTablesEngine;
 import ifs.engine.TablesEngine;
 import ifs.jl.CheckRefs;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 /**
  * @author TDEWEERD
  * db.csv
  */
 
-public class Mapper {
+public class Mapper {	
 	/**
 	 * @param args
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		System.out.printf ("Time at start = %s", new Date() );
+		System.out.printf ("Time at start = %s \n", new Date() );
 		//print to output.txt -prog / db-
 		try {
+			clearFiles();
 			//CheckReferences cr = new CheckReferences(new FileInputStream(Constants.SOURCE_CODE));
 			CheckRefs cr = new CheckRefs();
 			cr.run();
@@ -53,47 +46,13 @@ public class Mapper {
 		System.out.printf ("Time at end = %s", new Date() );
 	}
 	
-	public static void printOutput(HashMap<Table, ArrayList<Program>> h) {
-
-		try {
-			// Create file
-			FileWriter fstream = new FileWriter(new File(Constants.CSVOUTPUTFILE));
-			BufferedWriter out = new BufferedWriter(fstream);
-			Iterator<Entry<Table, ArrayList<Program>>> it = h.entrySet().iterator();
-			out.write("Table;C;R;U;D;Program;Owner");
-			out.newLine();
-			while (it.hasNext()) {
-				Entry<Table, ArrayList<Program>> e = it.next();
-				if (!TablesEngine.tableAndOwner.containsKey(e.getKey().getTableName()))
-					continue;
-				
-				for(Program s : e.getValue()){
-					//table
-					out.write(e.getKey().getTableName());
-					out.write(';');
-					//tablecrudoperation
-					out.write(s.getCrudOperation('C'));
-					out.write(';');
-					out.write(s.getCrudOperation('R'));
-					out.write(';');
-					out.write(s.getCrudOperation('U'));
-					out.write(';');
-					out.write(s.getCrudOperation('D'));
-					out.write(';');				
-					//program
-					out.write(s.getProgramName());
-					out.write(';');
-					//owner
-					out.write(TablesEngine.tableAndOwner.get(e.getKey().getTableName()));
-					out.write(';');
-					out.newLine();
-				}
-			}
-			// Close the output stream
-			out.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+	private static void clearFiles(){
+		if(!(new File(Constants.CSVOUTPUTFILE).delete()
+				&& new File(Constants.GPROGOUTPUT).delete()
+				&& new File(Constants.TEXTOUTPUTFILE).delete()
+				&& new File(Constants.SKIPPEDLINES).delete())) {
+			System.err.println("Please close all files!");
+			System.exit(-1);
 		}
 	}
-
 }

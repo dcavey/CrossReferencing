@@ -13,12 +13,12 @@ import java.util.Set;
 public class BasicProgram implements Program {
 
 	private String name;
-	private String programDescription;
+	private String programType;
 	private Set<String> crud = new HashSet<String>();
 	
-	public BasicProgram(String name, String programDescription) {
+	public BasicProgram(String name, String programType) {
 		this.name = name;
-		this.programDescription = programDescription;
+		this.programType = programType;
 	}
 	/* (non-Javadoc)
 	 * @see ifs.datamodel.Program#getProgramName()
@@ -29,8 +29,8 @@ public class BasicProgram implements Program {
 	}
 	
 	@Override
-	public String getProgramDecription() {
-		return programDescription;
+	public String getProgramType() {
+		return programType;
 	}
 
 	@Override

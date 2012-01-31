@@ -20,12 +20,15 @@ public class CheckRefs {
 
 	private ArrayList<String> databases;
 	private ArrayList<String> programs;
+	private ArrayList<String> glPrograms;
 	private HashMap<String,ArrayList<Table>> references;
 	private ArrayList<Integer> unmatchedLines;
 
 	public CheckRefs() {
 		databases = readDbs();
-		programs = readProgs();
+		programs = new ArrayList<String>();
+		glPrograms = new ArrayList<String>();
+		readProgs();
 		references = fillReferences(programs);
 		unmatchedLines = new ArrayList<Integer>();
 	}
@@ -41,9 +44,6 @@ public class CheckRefs {
 			// Read File Line By Line
 			while ((strLine = br.readLine()) != null) {
 				lineNr++;
-				if(lineNr == 883426){
-					System.out.print("STOP");
-				}
 				String[] text = strLine.replaceAll("  +", " ").split(" ");
 				if(strLine.matches(".*DT;.*") || strLine.matches(".*DETERMINE.*") || strLine.matches(".*LU;.*")){
 					saveTable(text, Table.DETERMINE);
@@ -56,6 +56,7 @@ public class CheckRefs {
 				} else {
 					unmatchedLines.add(lineNr);
 				}
+				checkGPrograms(strLine);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +64,7 @@ public class CheckRefs {
 		printOutput(references);
 		printSkippedLines();
 	}
-	
+
 	private void saveTable(String[] text, String crud) {
 		ArrayList<String> tables = findDBTables(text, crud);
 		if(crud.equals(Table.FLAG) && tables.size()>1){
@@ -143,6 +144,19 @@ public class CheckRefs {
 		}
 		return dbs;
 	}
+	
+	private void checkGPrograms(String strLine){
+		CSVWriter csvW = new CSVWriter();
+		if (strLine.matches(".*INSERT.*")){
+			strLine.replace("  +", " ");
+			String[] strWords = strLine.split(" "); 
+			for(int i = 1; i < strWords.length; i++){
+				if(glPrograms.contains(strWords[i]) && programs.contains(strWords[0].substring(2))){
+					csvW.writeLineToFile(Constants.GPROGOUTPUT, "GLOBAL_LOGIC;"+strWords[i]+";PROGRAM;"+strWords[0].substring(2));
+				}
+			}
+		}
+	}
 
 	private ArrayList<String> readDbs() {
 		ArrayList<String> outputList = new ArrayList<String>();
@@ -166,8 +180,7 @@ public class CheckRefs {
 		return outputList;
 	}
 
-	private ArrayList<String> readProgs() {
-		ArrayList<String> outputList = new ArrayList<String>();
+	private void readProgs() {
 		try {
 			// Open the file
 			FileInputStream fstream = new FileInputStream(Constants.PROGFILE);
@@ -178,14 +191,16 @@ public class CheckRefs {
 			// Read File Line By Line
 			while ((strLine = br.readLine()) != null) {
 				String[] output = strLine.split(";");
-				outputList.add(output[1]);
+				programs.add(output[1]);
+				if(output[0].equals("G")){
+					glPrograms.add(output[1]);
+				}
 			}
 			// Close the input stream
 			in.close();
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
-		return outputList;
 	}
 	
 	private HashMap<String,ArrayList<Table>> fillReferences(ArrayList<String> progs){

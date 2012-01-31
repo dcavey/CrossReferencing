@@ -28,7 +28,7 @@ public class ProgramTablesEngine {
 		
 		FileWriter fstream = new FileWriter(Constants.CSVOUTPUTFILE);
 		BufferedWriter out = new BufferedWriter(fstream);
-		out.write("Table;C;R;U;D;Owner;Program");
+		out.write("Table;C;R;U;D;Program;Owner");
 		out.newLine();
 		
 		BufferedReader bufRdr = null;
@@ -70,12 +70,12 @@ public class ProgramTablesEngine {
 					out.write(table.getCrudOperation('U'));
 					out.write(';');
 					out.write(table.getCrudOperation('D'));
-					out.write(';');
-					//owner
-					out.write(TablesEngine.tableAndOwner.get(table.getTableName()));
 					out.write(';');					
 					//program
 					out.write(program.getProgramName());
+					out.write(';');
+					//owner
+					out.write(TablesEngine.tableAndOwner.get(table.getTableName()));
 					out.write(';');
 					out.newLine();
 				}
