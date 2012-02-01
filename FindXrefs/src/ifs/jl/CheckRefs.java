@@ -22,6 +22,7 @@ public class CheckRefs {
 	private ArrayList<String> programs;
 	private ArrayList<String> glPrograms;
 	private HashMap<String,ArrayList<Table>> references;
+	private HashMap<String, ArrayList<String>> glreferences;
 	private ArrayList<Integer> unmatchedLines;
 
 	public CheckRefs() {
@@ -30,6 +31,7 @@ public class CheckRefs {
 		glPrograms = new ArrayList<String>();
 		readProgs();
 		references = fillReferences(programs);
+		glreferences = fillGLReferences(glPrograms);
 		unmatchedLines = new ArrayList<Integer>();
 	}
 
@@ -152,7 +154,10 @@ public class CheckRefs {
 			String[] strWords = strLine.split(" "); 
 			for(int i = 1; i < strWords.length; i++){
 				if(glPrograms.contains(strWords[i]) && programs.contains(strWords[0].substring(2))){
-					csvW.writeLineToFile(Constants.GPROGOUTPUT, "GLOBAL_LOGIC;"+strWords[i]+";PROGRAM;"+strWords[0].substring(2));
+					if(!glreferences.get(strWords[i]).contains(strWords[0].substring(2))){
+						glreferences.get(strWords[i]).add(strWords[0].substring(2));
+						csvW.writeLineToFile(Constants.GPROGOUTPUT, "GLOBAL_LOGIC;"+strWords[i]+";PROGRAM;"+strWords[0].substring(2));
+					}
 				}
 			}
 		}
@@ -208,6 +213,15 @@ public class CheckRefs {
 		for(int i = 0; i < progs.size(); i++){
 			ArrayList<Table> tabs = new ArrayList<Table>();
 			refs.put(progs.get(i), tabs);
+		}
+		return refs;
+	}
+	
+	private HashMap<String,ArrayList<String>> fillGLReferences(ArrayList<String> glprogs){
+		HashMap<String, ArrayList<String>> refs = new HashMap<String, ArrayList<String>>();
+		for(int i = 0; i < glprogs.size(); i++){
+			ArrayList<String> progs = new ArrayList<String>();
+			refs.put(glprogs.get(i), progs);
 		}
 		return refs;
 	}
