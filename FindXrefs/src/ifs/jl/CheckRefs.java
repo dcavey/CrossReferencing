@@ -63,8 +63,56 @@ public class CheckRefs {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		inheritanceFromGL();
 		printOutput(references);
 		printSkippedLines();
+	}
+
+	private void inheritanceFromGL() {
+		// Run over all GL programs
+		for(String glProg : glPrograms){
+			// Get all programs who use this GL
+			ArrayList<String> inherProgs = glreferences.get(glProg);
+			// Get all tables used by this GL
+			ArrayList<Table> glTables = references.get(glProg);
+			if(inherProgs != null && glTables != null){
+				// Inheritance for each program used by the GL
+				for(String prog : inherProgs){
+					ArrayList<Table> currentTables = references.get(prog);
+					// Push all tables from the GL into the program
+					for(Table glTable : glTables){
+						int j = 0;
+						while(j < currentTables.size() && !currentTables.get(j).getTableName().equals(glTable.getTableName())){
+							j++;
+						}
+						// If the program already uses the table, adapt the crud
+						if(j < currentTables.size()){
+							Table newTable = new BasicTable(glTable.getTableName(),"");
+							Table findTab = currentTables.get(j);
+							if(!glTable.getCrudOperation('C').isEmpty() || !findTab.getCrudOperation('C').isEmpty()){
+								newTable.pushCrudOperation("C");
+							}
+							if(!glTable.getCrudOperation('R').isEmpty() || !findTab.getCrudOperation('R').isEmpty()){
+								newTable.pushCrudOperation("R");
+							}
+							if(!glTable.getCrudOperation('U').isEmpty() || !findTab.getCrudOperation('U').isEmpty()){
+								newTable.pushCrudOperation("U");
+							}
+							if(!glTable.getCrudOperation('D').isEmpty() || !findTab.getCrudOperation('D').isEmpty()){
+								newTable.pushCrudOperation("D");
+							}
+							// Update list
+							currentTables.remove(j);
+							currentTables.add(newTable);
+						} else {
+							currentTables.add(glTable);
+						}
+					}
+					// Update the references
+					references.put(prog, currentTables);
+				}
+			}
+		}
 	}
 
 	private void saveTable(String[] text, String crud) {
