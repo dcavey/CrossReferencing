@@ -13,16 +13,22 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class CheckRefs {
 
+	private static boolean GLOBAL_LOGIC = true;
+	private static boolean MIDDLEWARE = false;
+	
 	private ArrayList<String> databases;
 	private ArrayList<String> programs;
 	private ArrayList<String> glPrograms;
 	private HashMap<String,ArrayList<Table>> references;
 	private HashMap<String, ArrayList<String>> glreferences;
+	private HashMap<String, Set<String>> midwarereferences;
 	private ArrayList<Integer> unmatchedLines;
 
 	public CheckRefs() {
@@ -32,6 +38,7 @@ public class CheckRefs {
 		readProgs();
 		references = fillReferences(programs);
 		glreferences = fillGLReferences(glPrograms);
+		midwarereferences = new HashMap<String, Set<String>>();
 		unmatchedLines = new ArrayList<Integer>();
 	}
 
@@ -58,58 +65,74 @@ public class CheckRefs {
 				} else {
 					unmatchedLines.add(lineNr);
 				}
-				checkGPrograms(strLine);
+				if(GLOBAL_LOGIC){
+					checkGPrograms(strLine);
+				}
+				if(MIDDLEWARE){
+					checkMiddleware(strLine);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		inheritanceFromGL();
+		for(String glProg : glPrograms){
+			inheritanceFromGL(glProg);
+		}
 		printOutput(references);
 		printSkippedLines();
 	}
-
-	private void inheritanceFromGL() {
-		// Run over all GL programs
-		for(String glProg : glPrograms){
-			// Get all programs who use this GL
-			ArrayList<String> inherProgs = glreferences.get(glProg);
-			// Get all tables used by this GL
-			ArrayList<Table> glTables = references.get(glProg);
-			if(inherProgs != null && glTables != null){
-				// Inheritance for each program used by the GL
-				for(String prog : inherProgs){
-					ArrayList<Table> currentTables = references.get(prog);
-					// Push all tables from the GL into the program
-					for(Table glTable : glTables){
-						int j = 0;
-						while(j < currentTables.size() && !currentTables.get(j).getTableName().equals(glTable.getTableName())){
-							j++;
-						}
-						// If the program already uses the table, adapt the crud
-						if(j < currentTables.size()){
-							Table newTable = new BasicTable(glTable.getTableName(),"");
-							Table findTab = currentTables.get(j);
-							if(!glTable.getCrudOperation('C').isEmpty() || !findTab.getCrudOperation('C').isEmpty()){
-								newTable.pushCrudOperation("C");
-							}
-							if(!glTable.getCrudOperation('R').isEmpty() || !findTab.getCrudOperation('R').isEmpty()){
-								newTable.pushCrudOperation("R");
-							}
-							if(!glTable.getCrudOperation('U').isEmpty() || !findTab.getCrudOperation('U').isEmpty()){
-								newTable.pushCrudOperation("U");
-							}
-							if(!glTable.getCrudOperation('D').isEmpty() || !findTab.getCrudOperation('D').isEmpty()){
-								newTable.pushCrudOperation("D");
-							}
-							// Update list
-							currentTables.remove(j);
-							currentTables.add(newTable);
-						} else {
-							currentTables.add(glTable);
-						}
+	private void inheritanceFromGL(String glProg) {
+		boolean changed = false;
+		// Get all programs who use this GL
+		ArrayList<String> inherProgs = glreferences.get(glProg);
+		// Get all tables used by this GL
+		ArrayList<Table> glTables = references.get(glProg);
+		if(inherProgs != null && glTables != null){
+			// Inheritance for each program used by the GL
+			for(String prog : inherProgs){
+				ArrayList<Table> toRemove = new ArrayList<Table>();
+				ArrayList<Table> currentTables = references.get(prog);
+				ArrayList<Table> newTables = new ArrayList<Table>();
+				// Push all tables from the GL into the program
+				for(Table glTable : glTables){
+					int j = 0;
+					while(j < currentTables.size() && !currentTables.get(j).getTableName().equals(glTable.getTableName())){
+						j++;
 					}
-					// Update the references
-					references.put(prog, currentTables);
+					// If the program already uses the table, adapt the crud
+					if(j < currentTables.size()){
+						Table newTable = new BasicTable(glTable.getTableName(),"");
+						Table findTab = currentTables.get(j);
+						if(!glTable.getCrudOperation('C').isEmpty() || !findTab.getCrudOperation('C').isEmpty()){
+							newTable.pushCrudOperation("C");
+						}
+						if(!glTable.getCrudOperation('R').isEmpty() || !findTab.getCrudOperation('R').isEmpty()){
+							newTable.pushCrudOperation("R");
+						}
+						if(!glTable.getCrudOperation('U').isEmpty() || !findTab.getCrudOperation('U').isEmpty()){
+							newTable.pushCrudOperation("U");
+						}
+						if(!glTable.getCrudOperation('D').isEmpty() || !findTab.getCrudOperation('D').isEmpty()){
+							newTable.pushCrudOperation("D");
+						}
+						if(!newTable.getCrudOperation().equals(findTab.getCrudOperation())){
+							// Update list
+							newTables.add(newTable);
+							toRemove.add(findTab);
+							changed = true;
+						}
+					} else {
+						newTables.add(glTable);
+						changed = true;
+					}
+				}
+				// Update the references
+				currentTables.removeAll(toRemove);
+				newTables.addAll(currentTables);
+				references.put(prog, newTables);
+				// Check recursion
+				if(glPrograms.contains(prog) && changed){
+					inheritanceFromGL(prog);
 				}
 			}
 		}
@@ -210,7 +233,46 @@ public class CheckRefs {
 			}
 		}
 	}
+	
+	private void checkMiddleware(String strLine){
+		CSVWriter csvW = new CSVWriter();
+		if ( (strLine.contains("BP-") ) &&  (strLine.contains("INS") ) ){
+			int beginIndex = strLine.indexOf("BP-"); 
+			int endIndex = beginIndex + 18;
+			String callee= strLine.substring(beginIndex, endIndex);
+			
+			String tempString = strLine.substring(2,19); 
+			endIndex = tempString.indexOf (" ");
+			String caller = strLine.substring(2, 2+endIndex);
+			
+			String tacsyType;
+			if (callee.contains("SAG")) {
+				tacsyType = "SAGE";
+			} else {
+				tacsyType = "EASY";
+			}
+			fillMidwareList(callee,caller);
+			System.out.printf ("TACSY: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, tacsyType );
+			csvW.writeLineToFile(Constants.MWOUTPUT, "TACSY;CALLER;" + caller + ";CALLEE;" + callee + ";TACSYTYPE;" + tacsyType);
+		}
+	}
 
+	private boolean fillMidwareList(String callee, String caller){
+		Set<String> tmpList;
+		if(midwarereferences.containsKey(callee)){
+			tmpList = midwarereferences.get(callee);
+		} else {
+			tmpList = new HashSet<String>();
+		}
+		if(tmpList.contains(caller)){
+			return false;
+		} else {
+			tmpList.add(caller);
+			midwarereferences.put(caller, tmpList);
+			return true;
+		}
+	}
+	
 	private ArrayList<String> readDbs() {
 		ArrayList<String> outputList = new ArrayList<String>();
 		try {
