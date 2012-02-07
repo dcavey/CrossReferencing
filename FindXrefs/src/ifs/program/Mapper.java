@@ -72,5 +72,11 @@ public class Mapper {
 				System.exit(-1);
 			}
 		}
+		if(new File(Constants.MWOUTPUT).exists()){
+			if(!(new File(Constants.MWOUTPUT).delete())) {
+				System.err.println(ERROR_CLOSE_FILES);
+				System.exit(-1);
+			}
+		}
 	}
 }

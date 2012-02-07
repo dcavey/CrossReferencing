@@ -20,15 +20,15 @@ import java.util.Set;
 
 public class CheckRefs {
 
-	private static boolean GLOBAL_LOGIC = true;
-	private static boolean MIDDLEWARE = false;
+	private static boolean GLOBAL_LOGIC = false;
+	private static boolean MIDDLEWARE = true;
 	
 	private ArrayList<String> databases;
 	private ArrayList<String> programs;
 	private ArrayList<String> glPrograms;
 	private HashMap<String,ArrayList<Table>> references;
 	private HashMap<String, ArrayList<String>> glreferences;
-	private HashMap<String, Set<String>> midwarereferences;
+	private HashMap<String, ArrayList<String>> midwarereferences;
 	private ArrayList<Integer> unmatchedLines;
 
 	public CheckRefs() {
@@ -38,7 +38,7 @@ public class CheckRefs {
 		readProgs();
 		references = fillReferences(programs);
 		glreferences = fillGLReferences(glPrograms);
-		midwarereferences = new HashMap<String, Set<String>>();
+		midwarereferences = new HashMap<String, ArrayList<String>>();
 		unmatchedLines = new ArrayList<Integer>();
 	}
 
@@ -78,8 +78,10 @@ public class CheckRefs {
 		for(String glProg : glPrograms){
 			inheritanceFromGL(glProg);
 		}
+		inheritanceFromMW();
 		printOutput(references);
-		printSkippedLines();
+		//printSkippedLines();
+		printMWList();
 	}
 	private void inheritanceFromGL(String glProg) {
 		boolean changed = false;
@@ -244,32 +246,73 @@ public class CheckRefs {
 			String tempString = strLine.substring(2,19); 
 			endIndex = tempString.indexOf (" ");
 			String caller = strLine.substring(2, 2+endIndex);
+
+//			System.out.printf ("TACSY: CALLER=%s; CALLEE=%s \n", caller, callee );
+//			csvW.writeLineToFile(Constants.MWOUTPUT+"_check", "TACSY;CALLER;" + caller + ";CALLEE;" + callee);
 			
-			String tacsyType;
-			if (callee.contains("SAG")) {
-				tacsyType = "SAGE";
-			} else {
-				tacsyType = "EASY";
-			}
-			fillMidwareList(callee,caller);
-			System.out.printf ("TACSY: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, tacsyType );
-			csvW.writeLineToFile(Constants.MWOUTPUT, "TACSY;CALLER;" + caller + ";CALLEE;" + callee + ";TACSYTYPE;" + tacsyType);
+			fillMiddlewareList(caller,callee);
 		}
 	}
 
-	private boolean fillMidwareList(String callee, String caller){
-		Set<String> tmpList;
-		if(midwarereferences.containsKey(callee)){
-			tmpList = midwarereferences.get(callee);
+	private void fillMiddlewareList(String caller, String callee){
+		ArrayList<String> tmpList;
+		if(midwarereferences.containsKey(caller)){
+			tmpList = midwarereferences.get(caller);
 		} else {
-			tmpList = new HashSet<String>();
+			tmpList = new ArrayList<String>();
 		}
-		if(tmpList.contains(caller)){
-			return false;
-		} else {
-			tmpList.add(caller);
+		if(!tmpList.contains(callee)){
+			tmpList.add(callee);
 			midwarereferences.put(caller, tmpList);
-			return true;
+		}
+	}
+	
+	private void inheritanceFromMW(){
+		boolean changed = true;
+		while(changed){
+			changed = false;
+			Set<String> callers = midwarereferences.keySet();
+			for(String caller : callers){
+				ArrayList<String> currentCallees = midwarereferences.get(caller);
+				ArrayList<String> updatedCallees = new ArrayList<String>();
+				updatedCallees.addAll(currentCallees);
+				for(String callee : currentCallees){
+					if(midwarereferences.containsKey(callee)){
+						ArrayList<String> newCallees = midwarereferences.get(callee);
+						for(String newCallee : newCallees){
+							if(!currentCallees.contains(newCallee)){
+								updatedCallees.add(newCallee);
+								changed = true;
+							}
+						}
+					}
+				}
+				if(changed){
+					midwarereferences.put(caller, updatedCallees);
+				}
+			}
+		}
+	}
+	
+	private void printMWList(){
+		CSVWriter csvW = new CSVWriter();
+		Set<String> callers = midwarereferences.keySet();
+//		System.out.println("Length list callers = " + callers.size());
+		for(String caller : callers){
+//			System.out.println("Caller = " + caller);
+			ArrayList<String> callees = midwarereferences.get(caller);
+//			System.out.println("Length list callees = " + callees.size());
+			for(String callee : callees){
+//				System.out.println("Callee = " + callee);
+				String tacsyType;
+				if (callee.contains("SAG")) {
+					tacsyType = "SAGE";
+				} else {
+					tacsyType = "EASY";
+				}
+				System.out.printf ("TACSY: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, tacsyType );
+				csvW.writeLineToFile(Constants.MWOUTPUT, "TACSY;CALLER;" + caller + ";CALLEE;" + callee + ";TACSYTYPE;" + tacsyType);
+			}
 		}
 	}
 	
