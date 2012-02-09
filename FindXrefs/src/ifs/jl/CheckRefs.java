@@ -68,14 +68,38 @@ public class CheckRefs {
 			e.printStackTrace();
 		}
 		for(String glProg : glPrograms){
-			inheritanceFromGL(glProg);
+			crudInheritanceFromGL(glProg);
 		}
-		inheritanceFromMW();
+		for(String glProg : glPrograms){
+			referenceInheritanceFromGL(glProg);
+		}
+		
+		printGPrograms();
+		printMWList();
 		printOutput(references);
 		//printSkippedLines();
-		printMWList();
 	}
-	private void inheritanceFromGL(String glProg) {
+	
+	private void referenceInheritanceFromGL(String glProg){
+		ArrayList<String> programs = glreferences.get(glProg);
+		ArrayList<String> newPrograms = (ArrayList<String>)programs.clone();
+		for(String program : programs){
+			if(glPrograms.contains(program)){
+				if(!program.equals(glProg)){
+					referenceInheritanceFromGL(program);
+					ArrayList<String> programsToAdd = glreferences.get(program);
+					for(String programToAdd : programsToAdd){
+						if(!newPrograms.contains(programToAdd)){
+							newPrograms.add(programToAdd);
+						}
+					}
+				}
+			}
+		}
+		glreferences.put(glProg, newPrograms);
+	}
+	
+	private void crudInheritanceFromGL(String glProg) {
 		boolean changed = false;
 		// Get all programs who use this GL
 		ArrayList<String> inherProgs = glreferences.get(glProg);
@@ -126,12 +150,12 @@ public class CheckRefs {
 				references.put(prog, newTables);
 				// Check recursion
 				if(glPrograms.contains(prog) && changed){
-					inheritanceFromGL(prog);
+					crudInheritanceFromGL(prog);
 				}
 			}
 		}
 	}
-
+	
 	private void saveTable(String[] text, String crud) {
 		ArrayList<String> tables = findDBTables(text, crud);
 		if(crud.equals(Table.FLAG) && tables.size()>1){
@@ -221,9 +245,20 @@ public class CheckRefs {
 				if(glPrograms.contains(strWords[i]) && programs.contains(strWords[0].substring(2))){
 					if(!glreferences.get(strWords[i]).contains(strWords[0].substring(2))){
 						glreferences.get(strWords[i]).add(strWords[0].substring(2));
-						csvW.writeLineToFile(Constants.GPROGOUTPUT, "GLOBAL_LOGIC;"+strWords[i]+";PROGRAM;"+strWords[0].substring(2));
+						//csvW.writeLineToFile(Constants.GPROGOUTPUT, "GLOBAL_LOGIC;"+strWords[i]+";PROGRAM;"+strWords[0].substring(2));
 					}
 				}
+			}
+		}
+	}
+	
+	private void printGPrograms(){
+		CSVWriter csvW = new CSVWriter();
+		Set<String> glprogs = glreferences.keySet();
+		for(String glprog : glprogs){
+			ArrayList<String> references = glreferences.get(glprog);
+			for(String reference : references){
+				csvW.writeLineToFile(Constants.GPROGOUTPUT, "GLOBAL_LOGIC;"+glprog+";PROGRAM;"+reference);
 			}
 		}
 	}
@@ -246,10 +281,10 @@ public class CheckRefs {
 				endIndex = endIndexBU;
 			}
 			String caller = strLine.substring(2, 2+endIndex).trim();
-		
-			fillMiddlewareList(caller,callee);
+			
+			fillMiddlewareList(callee,caller);
 		} else if (strLine.contains   ("IFSYS/WF/TDFXFB")) {
-			fillMiddlewareList(strLine.substring(2,12),"DEFAULT XFB-routine");
+			fillMiddlewareList("DEFAULT XFB-routine", strLine.substring(2,12));
 		}
 	}
 
@@ -266,57 +301,24 @@ public class CheckRefs {
 		}
 	}
 	
-	private void inheritanceFromMW(){
-		boolean changed = true;
-		while(changed){
-			changed = false;
-			HashMap<String, ArrayList<String>> newMWRefs = new HashMap<String,ArrayList<String>>();
-			Set<String> callers = midwarereferences.keySet();
-			for(String caller : callers){
-				if(glreferences.containsKey(caller)){
-					ArrayList<String> newCallers = glreferences.get(caller);
-					for(String newCaller : newCallers){
-						ArrayList<String> newCallees = (ArrayList<String>)midwarereferences.get(caller).clone();
-						if(!newCallees.contains(caller)){
-							newCallees.add(caller);
-						}
-						ArrayList<String> oldCallees = midwarereferences.get(newCaller);
-						if(oldCallees != null){
-							for(String oldCallee : oldCallees){
-								if(!newCallees.contains(oldCallee)){
-									newCallees.add(oldCallee);
-								}
-							}
-						}
-						newMWRefs.put(newCaller, newCallees);
-						changed = true;
-					}
-				} else {
-					newMWRefs.put(caller, midwarereferences.get(caller));
-				}
-			}
-			midwarereferences = newMWRefs;
-		}
-	}
-	
 	private void printMWList(){
 		CSVWriter csvW = new CSVWriter();
-		Set<String> callers = midwarereferences.keySet();
-		for(String caller : callers){
-			ArrayList<String> callees = midwarereferences.get(caller);
-			for(String callee : callees){
-				String tacsyType;
-				if (callee.contains("SAG")) {
-					tacsyType = "SAGE";
-				} else {
-					tacsyType = "EASY";
-				}
-				if(!caller.equals(callee)){
+		Set<String> callees = midwarereferences.keySet();
+		for(String callee : callees){
+			ArrayList<String> callers = glreferences.get(callee);
+			if(callers!=null){
+				for(String caller : callers){
+					String tacsyType;
+					if (callee.contains("SAG")) {
+						tacsyType = "SAGE";
+					} else {
+						tacsyType = "EASY";
+					}
 					if(callee.equals("DEFAULT XFB-routine")){
-						System.out.printf ("XFB: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, "-" );
+						//System.out.printf ("XFB: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, "-" );
 						csvW.writeLineToFile(Constants.MWOUTPUT, "XFB;CALLER;" + caller + ";CALLEE;" + callee + ";TACSYTYPE;" + "-");
 					} else {
-						System.out.printf ("TACSY: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, tacsyType );
+						//System.out.printf ("TACSY: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, tacsyType );
 						csvW.writeLineToFile(Constants.MWOUTPUT, "TACSY;CALLER;" + caller + ";CALLEE;" + callee + ";TACSYTYPE;" + tacsyType);
 					}
 				}
