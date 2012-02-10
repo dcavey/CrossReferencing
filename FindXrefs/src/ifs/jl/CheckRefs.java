@@ -59,9 +59,12 @@ public class CheckRefs {
 				} else if(strLine.matches(".*PURGE.*") || strLine.matches(".*PU;.*")){
 					saveTable(text, Table.PURGE);
 				} else {
-					unmatchedLines.add(lineNr);
+					boolean passedGL = checkGPrograms(strLine);
+					boolean passedMW = checkMiddleware(strLine);
+					if(!(passedGL && passedMW)){
+						unmatchedLines.add(lineNr);
+					}
 				}
-				checkGPrograms(strLine);
 				checkMiddleware(strLine);
 			}
 		} catch (Exception e) {
@@ -77,7 +80,7 @@ public class CheckRefs {
 		printGPrograms();
 		printMWList();
 		printOutput(references);
-		//printSkippedLines();
+		printSkippedLines();
 	}
 	
 	private void referenceInheritanceFromGL(String glProg){
@@ -236,7 +239,7 @@ public class CheckRefs {
 		return dbs;
 	}
 	
-	private void checkGPrograms(String strLine){
+	private boolean checkGPrograms(String strLine){
 		CSVWriter csvW = new CSVWriter();
 		if (strLine.matches(".*INSERT.*")){
 			strLine.replace("  +", " ");
@@ -249,6 +252,9 @@ public class CheckRefs {
 					}
 				}
 			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -263,7 +269,7 @@ public class CheckRefs {
 		}
 	}
 	
-	private void checkMiddleware(String strLine){
+	private boolean checkMiddleware(String strLine){
 		CSVWriter csvW = new CSVWriter();
 		if ( (strLine.contains("BP-") ) &&  (strLine.contains("INS") ) ){
 			int beginIndex = strLine.indexOf("BP-"); 
@@ -283,8 +289,12 @@ public class CheckRefs {
 			String caller = strLine.substring(2, 2+endIndex).trim();
 			
 			fillMiddlewareList(callee,caller);
+			return true;
 		} else if (strLine.contains   ("IFSYS/WF/TDFXFB")) {
 			fillMiddlewareList("DEFAULT XFB-routine", strLine.substring(2,12));
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -305,19 +315,24 @@ public class CheckRefs {
 		CSVWriter csvW = new CSVWriter();
 		Set<String> callees = midwarereferences.keySet();
 		for(String callee : callees){
-			ArrayList<String> callers = glreferences.get(callee);
-			if(callers!=null){
-				for(String caller : callers){
-					String tacsyType;
-					if (callee.contains("SAG")) {
-						tacsyType = "SAGE";
-					} else {
-						tacsyType = "EASY";
-					}
-					if(callee.equals("DEFAULT XFB-routine")){
+			if(callee.equals("DEFAULT XFB-routine")){
+				ArrayList<String> callers = midwarereferences.get(callee);
+				if(callers!=null){
+					for(String caller : callers){
 						//System.out.printf ("XFB: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, "-" );
 						csvW.writeLineToFile(Constants.MWOUTPUT, "XFB;CALLER;" + caller + ";CALLEE;" + callee + ";TACSYTYPE;" + "-");
-					} else {
+					}
+				}
+			} else {
+				ArrayList<String> callers = glreferences.get(callee);
+				if(callers!=null){
+					for(String caller : callers){
+						String tacsyType;
+						if (callee.contains("SAG")) {
+							tacsyType = "SAGE";
+						} else {
+							tacsyType = "EASY";
+						}
 						//System.out.printf ("TACSY: CALLER=%s; CALLEE=%s; TACSYTYPE=%s \n", caller, callee, tacsyType );
 						csvW.writeLineToFile(Constants.MWOUTPUT, "TACSY;CALLER;" + caller + ";CALLEE;" + callee + ";TACSYTYPE;" + tacsyType);
 					}
