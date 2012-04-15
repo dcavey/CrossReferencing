@@ -29,8 +29,6 @@ public class Mapper {
 		// print to output.txt -prog / db-
 		try {
 			clearFiles();
-			// CheckReferences cr = new CheckReferences(new
-			// FileInputStream(Constants.SOURCE_CODE));
 			CheckRefs cr = new CheckRefs();
 			cr.run();
 		} catch (Exception e) {
