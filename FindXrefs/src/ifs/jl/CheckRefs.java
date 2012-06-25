@@ -218,6 +218,7 @@ public class CheckRefs {
 						//For FLAG
 						found = true;
 					} else if(text[i].trim().matches("P" + databases.get(j) + "[a-zA-Z0-9]+.*") && crud.equals(Table.DETERMINE)){
+						// ... KEYED access of the table 
 						//For DT
 						found = true;
 					} else if(text[i].trim().matches(".*(" + databases.get(j) + ").*") && crud.equals(Table.DETERMINE)){
