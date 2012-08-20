@@ -49,12 +49,25 @@ public class CheckRefs {
 			// Read File Line By Line
 			while ((strLine = br.readLine()) != null) {
 				lineNr++;
-				String[] text = strLine.replaceAll("  +", " ").split(" ");
+				
+				String stringMinusX1 = strLine.replaceAll("  +", " ");
+				String stringMinusX2 = stringMinusX1.replaceAll("\\.(?!.*\\.)"," ");
+				
+				
+				String[] text = stringMinusX2.replaceAll("  +", " ").split(" ");
+				
 				if(strLine.matches(".*DT;.*") || strLine.matches(".*DETERMINE.*") || strLine.matches(".*LU;.*")){
 					saveTable(text, Table.DETERMINE);
 				} else if(strLine.matches(".*FL;.*") || strLine.matches(".*FLAG.*")){
 					saveTable(text, Table.FLAG);
-				} else if(strLine.matches(".*AUTO\\.ENTRY.*") || strLine.matches(".*AE;.*")){
+//				} else if(strLine.matches(".*AUTO\\.ENTRY.*") || strLine.matches(".*AE;.*")   ){
+				} else if(strLine.matches(".*AUTO\\.ENTRY.*") || strLine.matches(".*AE;.*") || strLine.matches(".*AUTO.*")  ){
+					
+					/* if(strLine.matches(".*30PIAUTO102         IAUTO.*")) {
+						System.out.println("need to look here");  	// Debug anchor point
+					} */
+
+					
 					saveTable(text, Table.AUTO_ENTRY);
 				} else if(strLine.matches(".*PURGE.*") || strLine.matches(".*PU;.*")){
 					saveTable(text, Table.PURGE);
@@ -160,7 +173,15 @@ public class CheckRefs {
 	}
 	
 	private void saveTable(String[] text, String crud) {
+		
 		ArrayList<String> tables = findDBTables(text, crud);
+		
+		if (!isLINCProgram(text[0]))  {
+			System.out.println("Trying to push a reference for non-LINC program: " + text[0]);
+			return;
+		}
+		
+		
 		if(crud.equals(Table.FLAG) && tables.size()>1){
 			pushInReferences(text[0].substring(2), tables.get(0), Table.DETERMINE);
 			pushInReferences(text[0].substring(2), tables.get(1), crud);
@@ -179,6 +200,7 @@ public class CheckRefs {
 	
 	private void pushInReferences(String program, String table, String crud){
 		ArrayList<Table> dbs = new ArrayList<Table>();
+			
 		dbs = references.get(program);
 		if(dbs != null){
 			Table table1 = new BasicTable(table,crud);
@@ -198,6 +220,9 @@ public class CheckRefs {
 
 	private ArrayList<String> findDBTables(String[] text, String crud){
 		ArrayList<String> dbs = new ArrayList<String>();
+		boolean databasesContainsTable ;
+		boolean dbsContainsTable ;
+		String trimmedText;
 		int i = 1;
 		int j = -1;
 		boolean found = false;
@@ -205,8 +230,12 @@ public class CheckRefs {
 			if(text[i].equals(":")){
 				break;
 			}
-			if(databases.contains(text[i].trim())){
-				if(!dbs.contains(text[i].trim())){
+			trimmedText = text[i].trim();
+			databasesContainsTable = databases.contains(trimmedText);
+			dbsContainsTable = dbs.contains(trimmedText);
+			
+			if(databasesContainsTable){
+				if(!dbsContainsTable){
 					dbs.add(text[i].trim());
 				}
 				found = true;
@@ -480,4 +509,32 @@ public class CheckRefs {
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
+	
+	private boolean isLINCProgram(String program) {
+		
+		boolean thisIsALincProgram = false;
+		
+		if ( (program.startsWith("10")) ||		// ISPEC
+			 (program.startsWith("30")) ||      // don't know what this is -- don't need them
+ 			 (program.startsWith("40")) ||
+			 (program.startsWith("41")) ||
+			 (program.startsWith("42")) ||
+			 (program.startsWith("43")) ||
+			 (program.startsWith("44")) ||
+			 (program.startsWith("50")) ||  	// REPORT
+			 (program.startsWith("60")) ||      // PROFILE 		==> don't need them  		 
+			 (program.startsWith("70")) ||  	// GLOBAL LOGIC
+			 (program.startsWith("71")) ||  
+			 (program.startsWith("90")) 
+			 ) {
+			thisIsALincProgram = true;	
+		} 
+		
+		if ( program.startsWith("30P") ) {
+				thisIsALincProgram = false;		// trying to get rid of PIAUTO102 ;-)	
+			} 
+
+		return thisIsALincProgram;
+	}
+	
 }
