@@ -176,11 +176,9 @@ public class CheckRefs {
 		
 		ArrayList<String> tables = findDBTables(text, crud);
 		
-		if (!isLINCProgram(text[0]))  {
-			System.out.println("Trying to push a reference for non-LINC program: " + text[0]);
+		if (!isLINCProgram(text[0])) {
 			return;
 		}
-		
 		
 		if(crud.equals(Table.FLAG) && tables.size()>1){
 			pushInReferences(text[0].substring(2), tables.get(0), Table.DETERMINE);
@@ -532,8 +530,12 @@ public class CheckRefs {
 		
 		if ( program.startsWith("30P") ) {
 				thisIsALincProgram = false;		// trying to get rid of PIAUTO102 ;-)	
-			} 
+		} 
 
+		if (!thisIsALincProgram) {
+			System.out.println("This program is not taken into account: " + program);
+		}
+		
 		return thisIsALincProgram;
 	}
 	
